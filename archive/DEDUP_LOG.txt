@@ -1,0 +1,158 @@
+Removed files identical to src/ (SHA256 match): 18
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Colors.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\CPair.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Dispatcher.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Et.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Histogram.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\LruMap.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Missing.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\MissingImpl.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\MissingRanges.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\OldMissing.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\P.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Pair.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Range.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Single.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\SortedProperties.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Tee.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\rabbit\src\main\java\com\tayek\utilities\Utility.java
+C:\Users\ray\eclipse-workspace\util\archive\conradapps\tabletcore\src\com\tayek\utilities\LruMap.java
+
+Removed duplicate archive files (same SHA256 within archive):
+Keep: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\git1john2\src\com\tayek\utilities\Utilities.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\utilitiesqanda\src\com\tayek\utilities\Utilities.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\qanda\src\com\tayek\utilities\Utilities.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\poker\src\com\tayek\utilities\MyJApplet.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go3\src\com\tayek\utilities\MyJApplet.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\utilitiesqanda\src\com\tayek\utilities\MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H18.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H3.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H18.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H3.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\qanda\src\com\tayek\utilities\MainGui.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\utilityHmr\src\com\tayek\utilities\Utilities.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\Hmr\src\com\tayek\utilities\Utilities.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\conradapps\tayek\src\main\java\com\tayek\jat\utilities\MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H15.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H9.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H15.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H9.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\jat\src\com\tayek\jat\utilities\MainGui.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\conradapps\tayek\src\main\java\com\tayek\jat\utilities\Utilities.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\jat\src\com\tayek\jat\utilities\Utilities.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\histogramfiles\H2.Histogram.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\histogramfiles\H2.Histogram.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\histogramfiles\H7.Histogram.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\histogramfiles\H7.Histogram.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H10.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H10.MainGui.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H11.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H12.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go2\src\com\tayek\utilities\MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H11.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H12.MainGui.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H13.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H13.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\stackoverflow\gamedev23291\src\com\tayek\utilities\MainGui.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H16.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H16.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\jatindigo\src\com\tayek\utilities\MainGui.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H17.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H17.MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\john0\src\main\java\com\tayek\utilities\MainGui.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\ASimpleFormatter.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\ASimpleFormatter.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Et.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Et.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Et2Main.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Et2Main.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Histogram.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Histogram.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\HistogramExperiment.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\HistogramExperiment.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\HistogramWithMedian.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\HistogramWithMedian.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Indent.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Indent.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\IOUtilities.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\IOUtilities.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\LruCache.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\LruCache.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\LruCaches.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\LruCaches.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\LruMap.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\LruMap.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\MainGui.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Matching.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Matching.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Memory.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Memory.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\MySplit.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\MySplit.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Pair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Pair.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Semaphore.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Semaphore.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\StringPair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\StringPair.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\StringUtilities.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\StringUtilities.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Tee.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Tee.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Time.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Time.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Timeable.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Timeable.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Timer.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Timer.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Tree.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Tree.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Umbrella.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Umbrella.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Utils.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Utils.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\ET2TestCase.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\ET2TestCase.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\HistogramTestCase.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\HistogramTestCase.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\LruCacheTestCase.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\LruCacheTestCase.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\LruMapTestCase.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\LruMapTestCase.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\StringUtilitiesTestCase.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\StringUtilitiesTestCase.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\TimerTestCase.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\TimerTestCase.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\UtilsTestCase.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\UtilsTestCase.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\ListPair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go2\src\com\tayek\utilities\ListPair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go3\src\com\tayek\utilities\ListPair.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\MyJApplet.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go2\src\com\tayek\utilities\MyJApplet.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\stackoverflow\gamedev23291\src\com\tayek\utilities\MyJApplet.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\john0\src\main\java\com\tayek\utilities\MyJApplet.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\Pair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go2\src\com\tayek\utilities\Pair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go3\src\com\tayek\utilities\Pair.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\Dispatcher.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\Dispatcher.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\ListPair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\ListPair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\tgo-java-code\src\com\tayek\utilities\ListPair.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\MainGui.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\tgo-java-code\src\com\tayek\utilities\MainGui.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\MyJApplet.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\MyJApplet.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\tgo-java-code\src\com\tayek\utilities\MyJApplet.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\Pair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\Pair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\tgo-java-code\src\com\tayek\utilities\Pair.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\Utilities.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\Utilities.java
+
+Removed duplicates within archive: 79
+Remaining archive Java files: 102

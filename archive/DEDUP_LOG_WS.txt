@@ -1,0 +1,6 @@
+Removed files whitespace-equivalent to src/ (normalized SHA256 match): 0
+
+Removed duplicate archive files (whitespace-equivalent):
+
+Removed whitespace-equivalent duplicates within archive: 0
+Remaining archive Java files: 102

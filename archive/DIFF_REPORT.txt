@@ -1,0 +1,200 @@
+Workspace files: 37
+Archive files: 199
+Exact matches (same package+name, at least one identical copy): 24
+Different content (same package+name, no identical copy): 28
+Missing in workspace (present only in archive): 52
+Workspace-only (present only in workspace): 0
+
+== Different content ==
+com.tayek.easy.demo.util|LogInitializer.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\reasy2\src\com\tayek\easy\demo\util\LogInitializer.java
+com.tayek.easy.demo.util|Utilities.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\reasy2\src\com\tayek\easy\demo\util\Utilities.java
+com.tayek.io|Exec.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\io\Exec.java
+  archive:   
+com.tayek.io|ExecTestCase.java
+  workspace: C:\Users\ray\eclipse-workspace\util\tst\com\tayek\io\ExecTestCase.java
+  archive:   
+com.tayek.io|IO.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\io\IO.java
+  archive:   
+com.tayek.io|IOTestCase.java
+  workspace: C:\Users\ray\eclipse-workspace\util\tst\com\tayek\io\IOTestCase.java
+  archive:   
+com.tayek.io|Joiner.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\io\Joiner.java
+  archive:   
+com.tayek.io|Lilith.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\io\Lilith.java
+  archive:   
+com.tayek.io|LoggingHandler.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\io\LoggingHandler.java
+  archive:   
+com.tayek.io|LogServerOnTaptopTestCase.java
+  workspace: C:\Users\ray\eclipse-workspace\util\tst\com\tayek\io\LogServerOnTaptopTestCase.java
+  archive:   
+com.tayek.io|Nics.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\io\Nics.java
+  archive:   
+com.tayek.io|ReadLogFiles.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\io\ReadLogFiles.java
+  archive:   
+com.tayek.io|SubclassLogManagerShutdownHook.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\io\SubclassLogManagerShutdownHook.java
+  archive:   
+com.tayek.io|Toaster.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\io\Toaster.java
+  archive:   
+com.tayek.utilities|LoggingHandler.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\conradapps\tabletcore\src\com\tayek\utilities\LoggingHandler.java
+com.tayek.utilities|MyTimer.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\conradapps\tabletcore\src\com\tayek\utilities\MyTimer.java
+com.tayek.utilities|Original.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\conradapps\tabletcore\src\com\tayek\utilities\Original.java
+com.tayek.utilities|Statistics.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\conradapps\tabletcore\src\com\tayek\utilities\Statistics.java
+com.tayek.utilities|TestUtilities.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\conradapps\tabletcore\tst\com\tayek\utilities\TestUtilities.java
+com.tayek|MyTestWatcher.java
+  workspace: C:\Users\ray\eclipse-workspace\util\src\com\tayek\MyTestWatcher.java
+  archive:   
+iv.util|Config.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\imageViewer\iv\util\Config.java
+iv.util|GC.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\imageViewer\iv\util\GC.java
+iv.util|M.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\imageViewer\iv\util\M.java
+iv.util|Tee.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\imageViewer\iv\util\Tee.java
+iv.util|time.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\imageViewer\iv\util\time.java
+iv.util|Util.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\imageViewer\iv\util\Util.java
+tayek.easy.util|LogInitializer.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\reasy\src\tayek\easy\util\LogInitializer.java
+tayek.easy.util|SerialPortUtilities.java
+  workspace: 
+  archive:   C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\reasy\src\tayek\easy\util\SerialPortUtilities.java
+
+== Missing in workspace ==
+com.tayek.jat.utilities|H15.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H15.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H15.MainGui.java
+com.tayek.jat.utilities|H9.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H9.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H9.MainGui.java
+com.tayek.jat.utilities|MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\conradapps\tayek\src\main\java\com\tayek\jat\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\jat\src\com\tayek\jat\utilities\MainGui.java
+com.tayek.jat.utilities|Utilities.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\conradapps\tayek\src\main\java\com\tayek\jat\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\jat\src\com\tayek\jat\utilities\Utilities.java
+com.tayek.util|ASimpleFormatter.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\ASimpleFormatter.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\ASimpleFormatter.java
+com.tayek.util|Et.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Et.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Et.java
+com.tayek.util|Et2Main.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Et2Main.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Et2Main.java
+com.tayek.util|ET2TestCase.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\ET2TestCase.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\ET2TestCase.java
+com.tayek.util|Histogram.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Histogram.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Histogram.java
+com.tayek.util|HistogramExperiment.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\HistogramExperiment.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\HistogramExperiment.java
+com.tayek.util|HistogramTestCase.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\HistogramTestCase.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\HistogramTestCase.java
+com.tayek.util|HistogramWithMedian.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\HistogramWithMedian.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\HistogramWithMedian.java
+com.tayek.util|Indent.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Indent.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Indent.java
+com.tayek.util|IOUtilities.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\IOUtilities.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\IOUtilities.java
+com.tayek.util|LruCache.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\LruCache.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\LruCache.java
+com.tayek.util|LruCaches.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\LruCaches.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\LruCaches.java
+com.tayek.util|LruCacheTestCase.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\LruCacheTestCase.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\LruCacheTestCase.java
+com.tayek.util|LruMap.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\LruMap.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\LruMap.java
+com.tayek.util|LruMapTestCase.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\LruMapTestCase.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\LruMapTestCase.java
+com.tayek.util|MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\MainGui.java
+com.tayek.util|Matching.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Matching.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Matching.java
+com.tayek.util|Memory.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Memory.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Memory.java
+com.tayek.util|MySplit.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\MySplit.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\MySplit.java
+com.tayek.util|Pair.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Pair.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Pair.java
+com.tayek.util|Semaphore.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Semaphore.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Semaphore.java
+com.tayek.util|StringPair.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\StringPair.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\StringPair.java
+com.tayek.util|StringUtilities.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\StringUtilities.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\StringUtilities.java
+com.tayek.util|StringUtilitiesTestCase.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\StringUtilitiesTestCase.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\StringUtilitiesTestCase.java
+com.tayek.util|Tee.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Tee.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Tee.java
+com.tayek.util|Time.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Time.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Time.java
+com.tayek.util|Timeable.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Timeable.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Timeable.java
+com.tayek.util|Timer.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Timer.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Timer.java
+com.tayek.util|TimerTestCase.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\TimerTestCase.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\TimerTestCase.java
+com.tayek.util|Tree.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Tree.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Tree.java
+com.tayek.util|Umbrella.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Umbrella.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Umbrella.java
+com.tayek.util|Utils.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\src\com\tayek\util\Utils.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\src\com\tayek\util\Utils.java
+com.tayek.util|UtilsTestCase.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\tst\com\tayek\util\UtilsTestCase.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\tst\com\tayek\util\UtilsTestCase.java
+com.tayek.utilities|H10.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H10.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H10.MainGui.java
+com.tayek.utilities|H11.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H11.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H11.MainGui.java
+com.tayek.utilities|H12.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H12.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H12.MainGui.java
+com.tayek.utilities|H13.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H13.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H13.MainGui.java
+com.tayek.utilities|H16.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H16.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H16.MainGui.java
+com.tayek.utilities|H17.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H17.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H17.MainGui.java
+com.tayek.utilities|H18.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H18.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H18.MainGui.java
+com.tayek.utilities|H2.Histogram.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\histogramfiles\H2.Histogram.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\histogramfiles\H2.Histogram.java
+com.tayek.utilities|H3.MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\mainguifiles\H3.MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\mainguifiles\H3.MainGui.java
+com.tayek.utilities|H7.Histogram.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\gitprojects\javautilities\histogramfiles\H7.Histogram.java; C:\Users\ray\eclipse-workspace\util\archive\javautilities\histogramfiles\H7.Histogram.java
+com.tayek.utilities|ListPair.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\poker\src\com\tayek\utilities\ListPair.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\ListPair.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\ListPair.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\ListPair.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go2\src\com\tayek\utilities\ListPair.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go3\src\com\tayek\utilities\ListPair.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\tgo-java-code\src\com\tayek\utilities\ListPair.java
+com.tayek.utilities|MainGui.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\git1john2\src\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\utilitiesqanda\src\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go2\src\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\tgo-java-code\src\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\stackoverflow\gamedev23291\src\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\jatindigo\src\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\john0\src\main\java\com\tayek\utilities\MainGui.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\qanda\src\com\tayek\utilities\MainGui.java
+com.tayek.utilities|MyJApplet.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\poker\src\com\tayek\utilities\MyJApplet.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\MyJApplet.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\MyJApplet.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\MyJApplet.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go2\src\com\tayek\utilities\MyJApplet.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go3\src\com\tayek\utilities\MyJApplet.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\tgo-java-code\src\com\tayek\utilities\MyJApplet.java; C:\Users\ray\eclipse-workspace\util\archive\stackoverflow\gamedev23291\src\com\tayek\utilities\MyJApplet.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\jatindigo\src\com\tayek\utilities\MyJApplet.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\john0\src\main\java\com\tayek\utilities\MyJApplet.java
+com.tayek.utilities|MyTopJPanel.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\poker\src\com\tayek\utilities\MyTopJPanel.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go3\src\com\tayek\utilities\MyTopJPanel.java
+com.tayek.utilities|Utilities.java
+  archive: C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\git1john2\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\poker\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\utilitiesqanda\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\allEclipseProjects\utilityHmr\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.tgo\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go2\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\go3\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\goapps\tgo-java-code\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\stackoverflow\gamedev23291\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\Hmr\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\jatindigo\src\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\john0\src\main\java\com\tayek\utilities\Utilities.java; C:\Users\ray\eclipse-workspace\util\archive\strangeEclipseProjects\qanda\src\com\tayek\utilities\Utilities.java
+
+== Workspace-only ==

@@ -1,0 +1,12 @@
+Removed files whitespace-free equivalent to src/ (normalized SHA256 match): 0
+
+Removed duplicate archive files (whitespace-free equivalent):
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\ListPair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\ListPair.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\MyJApplet.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\MyJApplet.java
+Keep: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1hack\src\com\tayek\utilities\Pair.java
+  Remove: C:\Users\ray\eclipse-workspace\util\archive\goapps\go1z.newgo2\src\com\tayek\utilities\Pair.java
+
+Removed whitespace-free duplicates within archive: 3
+Remaining archive Java files: 99
