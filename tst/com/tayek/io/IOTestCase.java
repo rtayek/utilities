@@ -9,7 +9,7 @@ import com.tayek.MyTestWatcher;
 import com.tayek.io.IO;
 import com.tayek.io.IO.*;
 import static com.tayek.io.IO.*;
-import static com.tayek.utilities.Utility.*;
+import static com.tayek.utilities.Utilities.*;
 public class IOTestCase {
     @Rule public TestRule watcher=new MyTestWatcher();
 

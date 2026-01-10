@@ -1,5 +1,5 @@
 package com.tayek.io;
-import static com.tayek.utilities.Utility.*;
+import static com.tayek.utilities.Utilities.*;
 import java.io.IOException;
 import java.util.Arrays;
 import static com.tayek.io.IO.*;
