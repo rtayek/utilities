@@ -1,0 +1,8 @@
+ look at javautilities/. shoul be an prpject iin allecliopse[rokecys/
+ 
+ code 7 and 8 for Utilities.java?
+ 
+ set | grep -E '^(xx|yy|zz)='
+
+IO her is from rabbit.
+   
