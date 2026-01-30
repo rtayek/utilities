@@ -1,0 +1,120 @@
+package com.tayek.util.io;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import static com.tayek.util.io.IO.*;
+import static java.lang.Math.*;
+import java.util.*;
+public class Exec {
+    public Exec(String command) {
+        processBuilder=new ProcessBuilder(command);
+    }
+    public Exec(String[] strings) {
+        List<String> command=Arrays.asList(strings);
+        processBuilder=new ProcessBuilder(command);
+    }
+    public static String output(InputStream inputStream) throws IOException {
+        StringBuilder sb=new StringBuilder();
+        BufferedReader br=null;
+        try {
+            br=new BufferedReader(new InputStreamReader(inputStream));
+            String line=null;
+            while((line=br.readLine())!=null) {
+                sb.append(line+System.getProperty("line.separator"));
+            }
+        } finally {
+            br.close();
+        }
+        return sb.toString();
+    }
+    public Exec run() {
+        Process process;
+        try {
+            process=processBuilder.start();
+            //p("started process.");
+            rc=process.waitFor();
+            //p("process returned: "+rc);
+            output=output(process.getInputStream());
+            error=output(process.getErrorStream());
+        } catch(IOException e) {
+            l.warning("caught: "+e);
+            e.printStackTrace();
+        } catch(InterruptedException e) {
+            l.warning("caught: "+e);
+            e.printStackTrace();
+        } catch(Exception e) {
+            l.warning("caught: "+e);
+            e.printStackTrace();
+        }
+        //printThreads();
+        return this;
+    }
+    public void print() {
+        print(rc,output,error);
+    }
+    public static void print(int rc,String output,String error) {
+        p("return code: "+rc);
+        p("output: '"+output+"'");
+        p("err: '"+error+"'");
+    }
+    public static int exec(String[] strings) {
+        //p("building process: "+Arrays.asList(strings));
+        Exec exec=new Exec(strings);
+        exec.run();
+        //exec.print();
+        return exec.rc;
+    }
+    public static int exec(String command) {
+        List<String> parts=splitCommand(command);
+        if(parts.isEmpty()) return -1;
+        Exec exec=new Exec(parts.toArray(new String[0]));
+        exec.run();
+        print(exec.rc,exec.output,exec.error);
+        return exec.rc;
+    }
+    private static List<String> splitCommand(String command) {
+        if(command==null) return Collections.emptyList();
+        StringTokenizer tokenizer=new StringTokenizer(command);
+        List<String> parts=new ArrayList<>(tokenizer.countTokens());
+        while(tokenizer.hasMoreTokens())
+            parts.add(tokenizer.nextToken());
+        return parts;
+    }
+    public static int ping(String host) {
+        return exec(new String[] {"ping",host});
+    }
+    public static boolean canWePing(String host,int timeout) {
+        String timeoutString="";
+        if(isAndroid()) {
+            timeoutString+=max(1,timeout/1_000);
+            return exec(new String[] {"ping","-c","1","-W",timeoutString,host})==0;
+        } else {
+            timeoutString+=timeout;
+            Exec exec=new Exec(new String[] {"ping","-n","1","-w",""+timeoutString,host});
+            exec.run();
+            boolean ok=false;
+            if(exec.output.contains("Reply from "+host+":")) {
+                ok=true;
+            }
+            else p("output: "+exec.output);
+            return ok;
+        }
+    }
+    public static void main(String[] args) throws InterruptedException,IOException {
+        p("------");
+        Exec exec=new Exec(new String[] {"ping","localhost"});
+        exec.run();
+        exec.print();
+        p("------");
+        Exec.exec("ping localhost");
+        p("------");
+        Exec.ping("localhost");
+        p("------");
+        new Exec(new String[] {"ping","localhost"}).run().print();
+    }
+    final ProcessBuilder processBuilder;
+    int rc;
+    String output="",error="";
+    public static final String[] goodhosts=new String[] {"127.0.0.1","localhost",tabletRouter},badHosts=new String[] {"probablyNotAHostName"};
+}
