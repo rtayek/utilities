@@ -1,4 +1,4 @@
-package com.tayek.uti;
+package com.tayek.util.core;
 public class Et {
     public Et() {
         resetInternal();

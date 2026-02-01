@@ -85,9 +85,6 @@ public class Exec {
 	public static int ping(String host) {
 		return exec(new String[]{"ping",host});
 	}
-	public static boolean isAndroid() {
-		return System.getProperty("http.agent")!=null;  // fragile! 
-	}
 	public static boolean canWePing(String host,int timeout) {
 		String timeoutString="";
 		if(isAndroid()) {

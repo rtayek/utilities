@@ -1,12 +1,13 @@
-package com.tayek.util.io;
-import static com.tayek.util.io.IO.*;
+package com.tayek.util.log;
+import static com.tayek.util.io.Print.*;
+import com.tayek.util.concurrent.Threads;
 public class Joiner implements Runnable {
     public Joiner(int n) {
         this.n=n;
     }
     @Override public void run() {
         while(Thread.activeCount()>n) {
-            Thread[] threads=getThreads();
+            Thread[] threads=Threads.getThreads();
             p("threads:");
             for(Thread thread:threads)
                 if(thread!=null) {

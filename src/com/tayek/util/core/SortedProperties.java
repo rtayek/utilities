@@ -1,4 +1,4 @@
-package com.tayek.uti;
+package com.tayek.util.core;
 import java.io.StringWriter;
 import java.util.*;
 public class SortedProperties extends Properties {

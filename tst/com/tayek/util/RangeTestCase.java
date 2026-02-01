@@ -1,5 +1,5 @@
 package com.tayek.util;
-import static com.tayek.uti.Range.*;
+import static com.tayek.utilrange.Range.*;
 import static org.junit.Assert.*;
 import org.junit.*;
 import org.junit.rules.TestRule;

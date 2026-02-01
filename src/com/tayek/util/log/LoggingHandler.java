@@ -1,12 +1,39 @@
-package com.tayek.util.io;
-import static com.tayek.util.io.IO.*;
+package com.tayek.util.log;
+import static com.tayek.util.io.Print.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.logging.*;
 import java.util.logging.Formatter;
-import com.tayek.uti.Pair;
+import com.tayek.util.core.Pair;
+import com.tayek.util.net.Net;
 public class LoggingHandler {
+    public static class SocketHandlerCallable implements Runnable,java.util.concurrent.Callable<java.util.logging.SocketHandler> {
+        public SocketHandlerCallable(String host,int service) {
+            this.host=host;
+            this.service=service;
+        }
+        @Override public void run() {
+            Thread.currentThread().setName("SHC "+serialNumber+" "+host+":"+service);
+            try {
+                socketHandler=new SocketHandler(host,service);
+                logger.info("got socket handler on: "+host+":"+service);
+                socketHandler.setLevel(Level.ALL);
+            } catch(IOException e) {
+                logger.info("caught: '"+e+"' constructing socket handler on: "+host+":"+service);
+            }
+        }
+        @Override public SocketHandler call() throws Exception {
+            run();
+            return socketHandler;
+        }
+        final Integer serialNumber=++serialNumbers;
+        final String host;
+        final int service;
+        public SocketHandler socketHandler;
+        static int serialNumbers;
+    }
     public static class MyFormatter extends Formatter {
         private MyFormatter() {}
         @Override public String format(LogRecord record) {
@@ -121,11 +148,11 @@ public class LoggingHandler {
     }
     public static void stopSocketHandler(SocketHandler socketHandler) {
         if(socketHandler!=null) {
-            l.warning("closing: "+socketHandler);
+            logger.warning("closing: "+socketHandler);
             try {
                 socketHandler.close();
             } catch(Exception e) {
-                l.warning("caught: "+e);
+                logger.warning("caught: "+e);
             }
         }
     }
@@ -191,6 +218,17 @@ public class LoggingHandler {
     static Map<Class<?>,Logger> map;
     public static final Set<Class<?>> loggers=new LinkedHashSet<>();
     static /* wow! */ {
-        loggers.add(IO.class);
+        loggers.add(LoggingHandler.class);
+        loggers.add(Net.class);
     }
+    public static final int defaultLogServerService=5000;
+    public static final int chainsawLogServerService=2222;
+    public static final int lilithLogServerService=11020;
+    public static final Map<Pair<String,Integer>,SocketHandler> logServerHosts=new LinkedHashMap<>();
+    static {
+        for(Integer service:new Integer[] {defaultLogServerService,/*chainsawLogServerService,lilithLogServerService,*/}) {
+            logServerHosts.put(new Pair<String,Integer>(Net.laptopToday,service),null);
+        }
+    }
+    public static final Logger logger=Logger.getLogger(LoggingHandler.class.getName());
 }

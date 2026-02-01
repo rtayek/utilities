@@ -1,4 +1,4 @@
-package com.tayek.uti;
+package com.tayek.util.core;
 import java.util.LinkedHashMap;
 import java.util.Map;
 public class LruMap<K,V> extends LinkedHashMap<K,V> {

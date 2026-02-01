@@ -1,5 +1,5 @@
 package com.tayek.util;
-import static com.tayek.util.io.IO.*;
+import static com.tayek.util.io.Print.*;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -11,8 +11,8 @@ import java.util.logging.Level;
 import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.MyTestWatcher;
-import com.tayek.uti.Missing;
-import com.tayek.util.io.LoggingHandler;
+import com.tayek.util.log.LoggingHandler;
+import com.tayek.utilrange.Missing;
 public class MissingTestCase {
     @Rule public TestRule watcher=new MyTestWatcher();
 

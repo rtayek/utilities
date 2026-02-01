@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.MyTestWatcher;
-import com.tayek.uti.Histogram;
+import com.tayek.util.core.Histogram;
 public class HistogramTestCase3 {
     @Rule public TestRule watcher=new MyTestWatcher();
 

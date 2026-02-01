@@ -1,4 +1,4 @@
-package com.tayek.util.io;
+package com.tayek.util.log;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 public class SubclassLogManagerShutdownHook {

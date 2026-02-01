@@ -1,4 +1,4 @@
-package com.tayek.uti;
+package com.tayek.util.io;
 import java.io.*;
 import java.util.*;
 public class Tee extends FilterOutputStream {

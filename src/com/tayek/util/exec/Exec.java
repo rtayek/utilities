@@ -1,11 +1,13 @@
-package com.tayek.util.io;
+package com.tayek.util.exec;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import static com.tayek.util.io.IO.*;
+import static com.tayek.util.io.Print.*;
 import static java.lang.Math.*;
 import java.util.*;
+import java.util.logging.Logger;
+import com.tayek.util.core.Android;
 public class Exec {
     public Exec(String command) {
         processBuilder=new ProcessBuilder(command);
@@ -86,7 +88,7 @@ public class Exec {
     }
     public static boolean canWePing(String host,int timeout) {
         String timeoutString="";
-        if(isAndroid()) {
+        if(Android.isAndroid()) {
             timeoutString+=max(1,timeout/1_000);
             return exec(new String[] {"ping","-c","1","-W",timeoutString,host})==0;
         } else {
@@ -116,5 +118,6 @@ public class Exec {
     final ProcessBuilder processBuilder;
     int rc;
     String output="",error="";
-    public static final String[] goodhosts=new String[] {"127.0.0.1","localhost",tabletRouter},badHosts=new String[] {"probablyNotAHostName"};
+    public static final String[] goodhosts=new String[] {"127.0.0.1","localhost",/*tabletRouter*/},badHosts=new String[] {"probablyNotAHostName"};
+    public static final Logger l=Logger.getLogger(Exec.class.getName());
 }

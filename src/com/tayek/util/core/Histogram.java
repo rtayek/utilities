@@ -1,4 +1,4 @@
-package com.tayek.uti;
+package com.tayek.util.core;
 import java.util.*;
 //should be called stats and should have two implementatons
 //one like this that uses buckets and one that keeps an accurate frequency distribution.

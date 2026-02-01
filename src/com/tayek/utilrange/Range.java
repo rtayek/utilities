@@ -1,5 +1,5 @@
-package com.tayek.uti;
-import static com.tayek.util.io.IO.*;
+package com.tayek.utilrange;
+import static com.tayek.util.io.Print.*;
 import java.lang.reflect.Constructor;
 import java.text.*;
 import java.util.*;

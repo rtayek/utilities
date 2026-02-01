@@ -1,5 +1,5 @@
-package com.tayek.util.io;
-import static com.tayek.util.io.IO.*;
+package com.tayek.util.net;
+import static com.tayek.util.io.Print.*;
 import java.net.*;
 import java.util.Enumeration;
 public class Nics {

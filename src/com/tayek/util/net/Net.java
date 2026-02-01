@@ -1,62 +1,15 @@
-package com.tayek.util.io;
-import java.io.*;
+package com.tayek.util.net;
+import static com.tayek.util.io.Print.*;
+import java.io.IOException;
 import java.net.*;
 import java.util.*;
-import java.util.Map.Entry;
-import java.util.logging.*;
-import com.tayek.uti.*;
-public class IO {
-    public static void pn(PrintStream out,String string) {
-        out.print(string);
-        out.flush();
-    }
-    public static void p(PrintStream out,String string) {
-        synchronized(out) {
-            pn(out,string);
-            pn(out,System.getProperty("line.separator"));
-        }
-    }
-    public static void p(String string) {
-        synchronized(System.out) {
-            p(System.out,string);
-        }
-    }
-    public static void pl(String string) {
-        l.warning(string);
-        p(System.out,string);
-    }
-    public static String toString(Thread thread) {
-        return thread.toString()+", state: "+thread.getState()+", is alive: "+thread.isAlive()+", is interrupted:  "+thread.isInterrupted();
-    }
+import java.util.logging.Logger;
+import com.tayek.util.core.Et;
+import com.tayek.util.core.Pair;
+import com.tayek.util.exec.Exec;
+public class Net {
     public static String toString(ServerSocket serverSocket) {
         return serverSocket+": "+serverSocket.isBound()+" "+serverSocket.isClosed();
-    }
-    public static boolean isAndroid() {
-        return System.getProperty("http.agent")!=null;
-    }
-    public static void printSystemProperties() {
-        Properties systemProperties=System.getProperties();
-        p("system properties:");
-        p("system properties size: "+systemProperties.size());
-        for(Entry<Object,Object> x:systemProperties.entrySet())
-            p(""+x.getKey()+'='+x.getValue());
-    }
-    // move some of these to utility?
-    public static Thread[] getThreads() {
-        int big=2*Thread.activeCount();
-        Thread[] threads=new Thread[big];
-        Thread.enumerate(threads);
-        return threads;
-    }
-    public static void printThreads() {
-        // this may need to be non static and filter tablets or groups!
-        // we could put id in thread name?
-        Thread[] threads=getThreads();
-        for(Thread thread:threads)
-            if(thread!=null) p(toString(thread));
-    }
-    public interface Callback<T> { // should be Consumer<T>
-        void call(T t);
     }
     public static class ShutdownOptions {
         public boolean shutdownInput,shutdownOutput,closeInput,closeOutput,closeSocket=true;
@@ -79,7 +32,7 @@ public class IO {
         public InetAddress inetAddress;
     }
     public static Set<InetAddress> addressesWith(String networkPrefix) {
-        Set<InetAddress> set=new LinkedHashSet<>(); // 
+        Set<InetAddress> set=new LinkedHashSet<>();
         try {
             Enumeration<NetworkInterface> networkInterfaces=NetworkInterface.getNetworkInterfaces();
             for(NetworkInterface networkInterface:Collections.list(networkInterfaces))
@@ -93,7 +46,7 @@ public class IO {
     }
     public static InetAddress addressWith(String networkPrefix) {
         Set<InetAddress> inetAddresses=addressesWith(networkPrefix);
-        if(inetAddresses.size()>1) l.severe("more than one inetAddress: "+inetAddresses);
+        if(inetAddresses.size()>1) logger.severe("more than one inetAddress: "+inetAddresses);
         return inetAddresses.size()>0?inetAddresses.iterator().next():null;
     }
     public static class AddressesWithCallable implements Runnable,java.util.concurrent.Callable<java.util.Set<java.net.InetAddress>> {
@@ -110,32 +63,6 @@ public class IO {
         }
         final String networkPrefix;
         public Set<InetAddress> addresses;
-    }
-    public static class SocketHandlerCallable implements Runnable,java.util.concurrent.Callable<java.util.logging.SocketHandler> {
-        public SocketHandlerCallable(String host,int service) {
-            this.host=host;
-            this.service=service;
-        }
-        @Override public void run() {
-            Thread.currentThread().setName("SHC "+serialNumber+" "+host+":"+service);
-            try {
-                socketHandler=new SocketHandler(host,service);
-                // socketHandler.setFormatter(new LoggingHandler());
-                l.info("got socket handler on: "+host+":"+service);
-                socketHandler.setLevel(Level.ALL);
-            } catch(IOException e) {
-                l.info("caught: '"+e+"' constructing socket handler on: "+host+":"+service);
-            }
-        }
-        @Override public SocketHandler call() throws Exception {
-            run();
-            return socketHandler;
-        }
-        final Integer serialNumber=++serialNumbers;
-        final String host;
-        final int service;
-        SocketHandler socketHandler;
-        static int serialNumbers;
     }
     static void printNetworkInterface(NetworkInterface netint) {
         p("Display name: "+netint.getDisplayName()+", Name: "+netint.getName());
@@ -172,9 +99,9 @@ public class IO {
             socket.connect(socketAddress,timeout);
             return socket;
         } catch(SocketTimeoutException e) {
-            IO.l.warning(socketAddress+", after: "+et+", with timeout: "+timeout+", caught: '"+e+"'");
+            logger.warning(socketAddress+", after: "+et+", with timeout: "+timeout+", caught: '"+e+"'");
         } catch(IOException e) {
-            IO.l.warning(socketAddress+", after: "+et+", with timeout: "+timeout+", caught: '"+e+"'");
+            logger.warning(socketAddress+", after: "+et+", with timeout: "+timeout+", caught: '"+e+"'");
         }
         return null;
     }
@@ -238,7 +165,6 @@ public class IO {
     }
     public static void main(String args[]) throws UnknownHostException {
         final Et et=new Et();
-        p("log server hosts: "+logServerHosts);
         printNetworkInterfaces();
         InetAddress localHost=InetAddress.getLocalHost();
         p("local: "+localHost);
@@ -252,10 +178,12 @@ public class IO {
         if(!defaultHost.equals(testingHost)) printInetAddresses(testingHost);
         Set<InetAddress> inetAddresses=addressesWith(tabletRouterPrefix);
         p("addresses on: "+tabletRouterPrefix+" are: "+inetAddresses);
-        if(!inetAddresses.contains(InetAddress.getByName(raysPcOnTabletNetworkToday))) p("address has changed, expected: "+raysPcOnTabletNetworkToday+", but got: "+inetAddresses);
+        if(!inetAddresses.contains(InetAddress.getByName(raysPcOnTabletNetworkToday)))
+            p("address has changed, expected: "+raysPcOnTabletNetworkToday+", but got: "+inetAddresses);
         inetAddresses=addressesWith(raysRouterPrefix);
         p("addresses on: "+raysRouterPrefix+" are: "+inetAddresses);
-        if(!inetAddresses.contains(InetAddress.getByName(raysPcOnRaysNetwork))) p("address has changed, expected: "+raysPcOnTabletNetworkToday+", but got: "+inetAddresses);
+        if(!inetAddresses.contains(InetAddress.getByName(raysPcOnRaysNetwork)))
+            p("address has changed, expected: "+raysPcOnTabletNetworkToday+", but got: "+inetAddresses);
         p(raysRouter+" "+canConnect(raysRouter,80,1_000));
         p(tabletRouter+" "+canConnect(tabletRouter,80,1_000));
         p("ping at: "+et);
@@ -294,18 +222,6 @@ public class IO {
     public static final String laptopToday="192.168.0.107"; // was 100
     public static final String defaultHost=raysPcOnTabletNetworkToday;
     public static final String testingHost=raysPcOnRaysNetwork;
-    public static final int defaultLogServerService=5000;
-    public static final int chainsawLogServerService=2222;
-    public static final int lilithLogServerService=11020;
-    public static final Map<Pair<String,Integer>,SocketHandler> logServerHosts=new LinkedHashMap<>();
-    // maybe key should be Pair<String,Integer> to allow for more than one log server on a host?
-    static {
-        for(Integer service:new Integer[] {defaultLogServerService,/*chainsawLogServerService,lilithLogServerService,*/}) {
-            //logServerHosts.put(new Pair<String,Integer>(raysPc,service),null);
-            //logServerHosts.put(new Pair<String,Integer>("192.168.0.138"/*raysPcOnTabletNetworkToday*/,service),null);
-            logServerHosts.put(new Pair<String,Integer>(laptopToday,service),null);
-        }
-    }
     public static final Map<Integer,String> androidIds=new TreeMap<>();
     static {
         androidIds.put(1,"0a9196e8"); // ab97465ca5e2af1a
@@ -317,5 +233,5 @@ public class IO {
         androidIds.put(7,"0b03ae31"); // #7 on 192.168.1.19
         androidIds.put(8,"015d2109aa080e1a"); // my nexus 7 on 192.168.0.18
     }
-    public static final Logger l=Logger.getLogger(IO.class.getName());
+    public static final Logger logger=Logger.getLogger(Net.class.getName());
 }

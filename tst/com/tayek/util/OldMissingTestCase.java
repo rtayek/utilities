@@ -10,8 +10,8 @@ import java.util.logging.Level;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import com.tayek.uti.OldMissing;
-import com.tayek.util.io.LoggingHandler;
+import com.tayek.util.log.LoggingHandler;
+import com.tayek.utilrange.OldMissing;
 public class OldMissingTestCase {
     @Before public void setUp() throws Exception {
         LoggingHandler.setLevel(Level.OFF);

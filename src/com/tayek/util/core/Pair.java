@@ -1,4 +1,4 @@
-package com.tayek.uti;
+package com.tayek.util.core;
 public class Pair<First,Second> {
     public Pair(First first,Second second) {
         this.first=first;

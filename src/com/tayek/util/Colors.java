@@ -1,6 +1,6 @@
-package com.tayek.uti;
-import static com.tayek.util.io.IO.*;
+package com.tayek.util;
 import static java.lang.Math.*;
+import java.util.logging.Logger;
 public class Colors {
     // this wants to be a map <widgetId,Info>
     // sort of a layout!
@@ -25,7 +25,7 @@ public class Colors {
     }
     public static int color(double rate) {
         if(!(0<=rate&&rate<=1)) {
-            l.severe("bad rate: "+rate);
+            logger.severe("bad rate: "+rate);
             return 0;
         }
         int color=0;
@@ -45,7 +45,7 @@ public class Colors {
     }
     public static int color2(double rate) {
         if(!(0<=rate&&rate<=1)) {
-            l.severe("bad rate: "+rate);
+            logger.severe("bad rate: "+rate);
             return 0;
         }
         int red=(int)(255*rate);
@@ -74,4 +74,5 @@ public class Colors {
         off[4]=0x804000;
     }
     public static final int red=0x00ff0000,orange=0x00ffc800,yellow=0x00ffff00,green=0x0000ff00,blue=0x000000ff;
+    private static final Logger logger=Logger.getLogger(Colors.class.getName());
 }

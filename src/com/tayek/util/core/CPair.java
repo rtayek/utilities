@@ -1,4 +1,4 @@
-package com.tayek.uti;
+package com.tayek.util.core;
 public class CPair<First,Second> {
     public CPair(First first,Second second) {
         this.first=first;

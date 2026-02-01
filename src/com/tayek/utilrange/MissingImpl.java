@@ -1,9 +1,9 @@
-package com.tayek.uti;
+package com.tayek.utilrange;
+import static com.tayek.utilrange.Range.*;
 import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
-import static com.tayek.uti.Range.*;
-import static com.tayek.util.io.IO.*;
+import java.util.logging.Logger;
 abstract class MissingABC<T extends Comparable<T>,R> implements Missing<T,R> {
     MissingABC(T t) {
         range=range(t,t);
@@ -25,11 +25,12 @@ abstract class MissingABC<T extends Comparable<T>,R> implements Missing<T,R> {
     @Override public synchronized boolean isDuplicate(T n) {
         //if(n<0) throw new MissingException("oops");
         if(n.compareTo(largest)<0&&!isMissing(n)) {
-            l.severe(n+" is strange duplicate: "+this); // getting this on tablets
+            logger.severe(n+" is strange duplicate: "+this); // getting this on tablets
             System.err.flush();
         }
         return n.compareTo(largest)<0&&!isMissing(n); // maybe should just return n<largest?
     }
+    protected static final Logger logger=Logger.getLogger(MissingABC.class.getName());
     protected T largest;
     protected Range<T> range; // initial value
 }
@@ -39,41 +40,41 @@ public class MissingImpl<T extends Comparable<T>>extends MissingABC<T,T> { // tr
     }
     @Override public synchronized void adjust(T n) {
         //if(n<0) throw new MissingException("oops");
-        l.fine("adjust: "+n+" "+this);
+        logger.fine("adjust: "+n+" "+this);
         if(n.compareTo(largest)<0) {
             if(missing.contains(n)) {
                 missing.remove(n);
                 if(!outOfOrder.contains(n)){
-                    l.info("adjust: adding: "+n+" to: "+this);
+                    logger.info("adjust: adding: "+n+" to: "+this);
                     outOfOrder.add(n);
                 }
-                else l.warning("duplicate out of oreder - may be missed if not in recent!");
+                else logger.warning("duplicate out of oreder - may be missed if not in recent!");
             } else {
-                l.warning("error: smaller is not in missing: "+n);
+                logger.warning("error: smaller is not in missing: "+n);
                 if(outOfOrder.contains(n)) {
-                    l.warning("but it is in out of order: "+n);
-                    l.warning("so it is a duplicate that may be missed if not in recent!t"+n);
+                    logger.warning("but it is in out of order: "+n);
+                    logger.warning("so it is a duplicate that may be missed if not in recent!t"+n);
                 } else {
-                    l.severe("error: so we will add it in: "+n);
+                    logger.severe("error: so we will add it in: "+n);
                     outOfOrder.add(n);
                     // throw new MissingException("error: smaller is not in
                     // missing: "+n);
                 }
             }
-        } else if(n.equals(largest)) l.fine("duplicat largest: "+n);
+        } else if(n.equals(largest)) logger.fine("duplicat largest: "+n);
         else {
             T nMinus1=range(n,n).sequence(n).previous().value();
-            l.fine("range missing: "+range(range.sequence(largest).next().value(),nMinus1));
+            logger.fine("range missing: "+range(range.sequence(largest).next().value(),nMinus1));
             for(T t:range(range.sequence(largest).next().value(),nMinus1)) {
-                l.fine("adding missing: "+t+" to: "+this);
+                logger.fine("adding missing: "+t+" to: "+this);
                 if(!missing.add(t)) {
-                    l.severe("error: set already contains: "+t);
+                    logger.severe("error: set already contains: "+t);
                     //throw new MissingException("error: set already contains: "+t);
                 }
             }
             largest=n;
         }
-        l.fine("after adjust: "+n+" "+this);
+        logger.fine("after adjust: "+n+" "+this);
     }
     @Override synchronized public String toString() {
         return largest+"-"+missing+", ooo: "+outOfOrder;

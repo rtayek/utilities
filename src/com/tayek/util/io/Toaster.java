@@ -1,5 +1,8 @@
 package com.tayek.util.io;
-import static com.tayek.util.io.IO.*;
+import static com.tayek.util.io.Print.*;
+import java.util.logging.Logger;
+import com.tayek.util.core.Android;
+import com.tayek.util.core.Callback;
 public interface Toaster {
     void toast(String string);
     Toaster toaster=Factory_.Implementation.instance().create();
@@ -8,7 +11,7 @@ public interface Toaster {
         @Override public void toast(String string) {
             if(callback!=null) callback.call(string);
             else {
-                l.warning("callback is not set: "+string);
+                logger.warning("callback is not set: "+string);
                 p("set callback!");
             }
             p(string);
@@ -18,13 +21,14 @@ public interface Toaster {
         }
         public Callback<String> callback;
     }
+	public static final Logger logger=Logger.getLogger(Toaster.class.getName());
 }
 interface Factory_ {
     abstract Toaster create();
     static class Implementation implements Factory_ {
         private Implementation() {}
         @Override public Toaster create() {
-            return isAndroid()?new Toaster.Android_():new WindowsToaster();
+            return Android.isAndroid()?new Toaster.Android_():new WindowsToaster();
         }
         static Factory_ instance() {
             return factory;

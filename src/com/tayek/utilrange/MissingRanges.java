@@ -1,9 +1,8 @@
-package com.tayek.uti;
+package com.tayek.utilrange;
+import static com.tayek.utilrange.Range.*;
 import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
-import static com.tayek.uti.Range.*;
-import static com.tayek.util.io.IO.*;
 public class MissingRanges<T extends Comparable<T>>extends MissingABC<T,Range<T>> {
     public MissingRanges(T n) {
         super(n);
@@ -17,25 +16,25 @@ public class MissingRanges<T extends Comparable<T>>extends MissingABC<T,Range<T>
                 if(!outOfOrder.contains(range)) {
                     outOfOrder.add(range);
                     reduce(outOfOrder);
-                } else l.warning("duplicate out of oreder - may be missed if not in recent!");
+                } else logger.warning("duplicate out of oreder - may be missed if not in recent!");
             } else {
-                l.warning("error: smaller is not in missing: "+n);
+                logger.warning("error: smaller is not in missing: "+n);
                 if(outOfOrder.contains(n)) {
-                    l.warning("but it is in out of order: "+n);
-                    l.warning("so it is a duplicate that may be missed if not in recent!t"+n);
+                    logger.warning("but it is in out of order: "+n);
+                    logger.warning("so it is a duplicate that may be missed if not in recent!t"+n);
                 } else {
-                    l.severe("error: so we will add it in: "+n);
+                    logger.severe("error: so we will add it in: "+n);
                     outOfOrder.add(range);
                     reduce(outOfOrder);
                     // throw new MissingException("error: smaller is not in
                     // missing: "+n);
                 }
             }
-        } else if(n.equals(largest)) l.fine("duplicat largest: "+n);
+        } else if(n.equals(largest)) logger.fine("duplicat largest: "+n);
         else {
             for(T t:range(range.sequence(largest).next().value(),n))
                 if(!missing.add(t)) {
-                    l.severe("error: set already contains: "+t);
+                    logger.severe("error: set already contains: "+t);
                     throw new MissingException("error: set already contains: "+t);
                 }
             largest=n;
