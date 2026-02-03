@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import com.tayek.util.log.LoggingHandler;
-import com.tayek.utilrange.OldMissing;
+import com.tayek.util.range.OldMissing;
 public class OldMissingTestCase {
     @Before public void setUp() throws Exception {
         LoggingHandler.setLevel(Level.OFF);

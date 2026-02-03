@@ -1,8 +1,8 @@
-package com.tayek.utilrange;
-import static com.tayek.util.io.Print.*;
+package com.tayek.util.range;
 import java.lang.reflect.Constructor;
 import java.text.*;
 import java.util.*;
+import static com.tayek.util.io.Print.*;
 public class Range<T extends Comparable<T>> implements Comparable<Range<T>>,Iterable<T> {
     // https://gleichmann.wordpress.com/2008/01/21/declarative-programming-a-range-type-for-java/
     public interface Sequence<T> {

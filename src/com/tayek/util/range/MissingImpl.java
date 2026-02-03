@@ -1,9 +1,9 @@
-package com.tayek.utilrange;
-import static com.tayek.utilrange.Range.*;
+package com.tayek.util.range;
 import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Logger;
+import static com.tayek.util.range.Range.*;
 abstract class MissingABC<T extends Comparable<T>,R> implements Missing<T,R> {
     MissingABC(T t) {
         range=range(t,t);

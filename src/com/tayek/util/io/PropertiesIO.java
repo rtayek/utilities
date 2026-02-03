@@ -3,6 +3,24 @@ import java.io.*;
 import java.net.URL;
 import java.util.Properties;
 public class PropertiesIO {
+	private static boolean loadInputStream(Properties properties,InputStream in) {
+		boolean rc=false;
+		if(in!=null) {
+			try {
+				properties.load(in);
+				rc=true;
+			} catch(IOException e) {
+				throw new RuntimeException(e);
+			} finally {
+				try {
+					in.close();
+				} catch(IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		return rc;
+	}
 	public static void loadPropertiesFile(Properties properties,String filename) {
 		File file=new File(filename);
 		try {
@@ -22,6 +40,25 @@ public class PropertiesIO {
 			throw new RuntimeException(e);
 		}
 		else System.out.println("url is null for filename: "+filename);
+	}
+	public static boolean loadFromResource(Properties properties,Class<?> context,String name) {
+		if(context==null) return false;
+		InputStream in=context.getResourceAsStream(name);
+		return loadInputStream(properties,in);
+	}
+	public static boolean loadFromClassLoader(Properties properties,ClassLoader classLoader,String name) {
+		if(classLoader==null) return false;
+		InputStream in=classLoader.getResourceAsStream(name);
+		return loadInputStream(properties,in);
+	}
+	public static boolean loadFromUrl(Properties properties,URL url) {
+		if(url==null) return false;
+		try {
+			InputStream in=url.openStream();
+			return loadInputStream(properties,in);
+		} catch(IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	public static void writePropertiesFile(Properties properties,String filename) {
 		try {

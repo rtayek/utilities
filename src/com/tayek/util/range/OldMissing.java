@@ -1,4 +1,4 @@
-package com.tayek.utilrange;
+package com.tayek.util.range;
 import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;

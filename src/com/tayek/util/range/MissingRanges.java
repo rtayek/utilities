@@ -1,8 +1,8 @@
-package com.tayek.utilrange;
-import static com.tayek.utilrange.Range.*;
+package com.tayek.util.range;
 import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
+import static com.tayek.util.range.Range.*;
 public class MissingRanges<T extends Comparable<T>>extends MissingABC<T,Range<T>> {
     public MissingRanges(T n) {
         super(n);

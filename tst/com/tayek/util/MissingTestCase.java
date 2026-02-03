@@ -12,7 +12,7 @@ import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.MyTestWatcher;
 import com.tayek.util.log.LoggingHandler;
-import com.tayek.utilrange.Missing;
+import com.tayek.util.range.Missing;
 public class MissingTestCase {
     @Rule public TestRule watcher=new MyTestWatcher();
 

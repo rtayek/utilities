@@ -1,4 +1,4 @@
-package com.tayek.utilrange;
+package com.tayek.util.range;
 import java.util.Set;
 public interface Missing<T extends Comparable<T>,R /*should be T or Range<T>*/ > {
     @SuppressWarnings("serial") class MissingException extends RuntimeException {
