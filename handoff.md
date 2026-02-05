@@ -1,44 +1,48 @@
-﻿# Utilities Project Handoff
+# Utilities Project Handoff
 
-Date: 2026-01-30
+Date: 2026-02-03
 
 ## Overview
-This is a plain Java Eclipse project that consolidates shared utility code. There is no Gradle/Maven build. The project is intended to be the single canonical source for these utilities (no JAR publishing yet).
+Plain Java Eclipse project consolidating shared utilities. No Gradle/Maven build. Source roots are `src/` (production) and `tst/` (JUnit tests). Archive material under `archive/` is not part of the build.
 
-## Structure
-- Source roots: `src/` (production), `tst/` (JUnit tests)
-- Java files: 24 in `src/`, 10 in `tst/`
-- Eclipse metadata: `.project`, `.classpath`, `.settings/`
-- Archive material lives under `archive/` and is not part of the build.
-
-## Current Packages
-Production (`src/`):
-- `com.tayek.uti`
-- `com.tayek.util.io`
-
-Tests (`tst/`):
-- `com.tayek.util`
-- `com.tayek.util.io`
-- `com.tayek` (MyTestWatcher)
-
-Package names remain as-is (no renames in this step).
-
-## Key Architecture Note
-There is a mutual dependency between the two production packages:
-- `com.tayek.uti` uses static imports from `com.tayek.util.io.IO`
-- `com.tayek.util.io` imports classes from `com.tayek.uti`
-
-This is acceptable inside one project/JAR but prevents splitting into separate artifacts.
+## Current Stats
+- Java files: 33 in `src/`, 10 in `tst/`
+- Production packages:
+  - `com.tayek.util`
+  - `com.tayek.util.concurrent`
+  - `com.tayek.util.core`
+  - `com.tayek.util.exec`
+  - `com.tayek.util.io`
+  - `com.tayek.util.log`
+  - `com.tayek.util.net`
+  - `com.tayek.util.range`
+- Test packages:
+  - `com.tayek.util`
+  - `com.tayek.util.io`
+  - `com.tayek` (MyTestWatcher)
 
 ## Recent Work
-- Cleared Eclipse warnings related to unused imports/locals, unnecessary suppression, and generic type mismatches.
-- Adjusted `MissingImpl` and `MissingRanges` generics to remove "unlikely argument type" warnings.
-- Minor test cleanup to remove unused imports and use a previously unused local `Histogram` instance.
+- Split large `Utilities` into focused helpers:
+  - `Texts`, `Stacks`, `Misc` (core)
+  - `FileIO`, `PropertiesIO`, `Serialization` (io)
+- Removed `Utilities.java` entirely after extracting its functionality.
+- Moved `IO` static helpers into dedicated classes:
+  - Networking moved to `com.tayek.util.net.Net`
+  - Thread helpers moved to `com.tayek.util.concurrent.Threads`
+  - System properties helper moved to `com.tayek.util.core.SystemProperties`
+- Logging server configuration and socket handler setup live in `com.tayek.util.log.LoggingHandler`.
+- Added `PropertiesIO` resource loading helpers (`loadFromResource`, `loadFromClassLoader`, `loadFromUrl`).
+
+## Key Architectural Notes
+- Networking, logging, and threading utilities are now split into separate subpackages to avoid cross-package cycles.
+- Range/missing tracking lives in `com.tayek.util.range` and uses static helpers from `Range`.
+- `P.java` is a small demo/harness for resource property loading; it now delegates to `PropertiesIO`.
 
 ## Build/Verification Notes
 - `javac -Xlint:all -d bin` on `src` completes without warnings.
-- Tests were not compiled from CLI due to missing JUnit classpath.
+- Tests are run in Eclipse (JUnit on classpath). CLI test compilation not set up here.
 
-## Next Steps (optional)
-- If you want CLI test compilation, provide the JUnit jar path to wire it in.
-- If/when package renaming is desired, handle via Eclipse refactor to preserve imports and folder layout.
+## Suggested Next Steps (optional)
+- Decide whether to keep or remove the demo `P.java` class.
+- Consider splitting `Net` into smaller classes (hosts/constants vs sockets/discovery) if desired.
+- Optional: scan `archive/` for old references to removed packages/classes.

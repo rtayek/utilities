@@ -5,4 +5,6 @@
  set | grep -E '^(xx|yy|zz)='
 
 IO her is from rabbit. rabbit2 is the latest.
+
+/c/dfromrays8350/ray/gitprojects/javautilities has some utilities. 
    

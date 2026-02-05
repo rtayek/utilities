@@ -1,0 +1,32 @@
+plugins {
+  id "java"
+  id "maven-publish"
+}
+
+group = "com.tayek"
+version = "0.0"   // set this to whatever you actually want
+
+sourceSets {
+  main {
+    java { srcDirs = ["src"] }
+    // Only keep this if you really have top-level "resources/"
+    resources { srcDirs = ["resources"] }
+  }
+  test {
+    java { srcDirs = ["tst"] }
+    // Only keep this if you really have "tstResources/"
+    resources { srcDirs = ["tstResources"] }
+  }
+}
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+      artifactId = "utilities"   // stable, regardless of folder name
+    }
+  }
+  repositories {
+    mavenLocal()
+  }
+}
