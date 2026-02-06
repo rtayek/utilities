@@ -6,6 +6,18 @@ plugins {
 group = "com.tayek"
 version = "0.0"   // set this to whatever you actually want
 
+repositories {
+  mavenCentral()
+}
+
+java {
+//  toolchain { languageVersion = JavaLanguageVersion.of(25) }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.release = 17
+}
+
 sourceSets {
   main {
     java { srcDirs = ["src"] }
@@ -19,11 +31,16 @@ sourceSets {
   }
 }
 
+dependencies {
+  implementation "gnu.getopt:java-getopt:1.0.13"
+  testImplementation "junit:junit:4.13.2"
+}
+
 publishing {
   publications {
     mavenJava(MavenPublication) {
       from components.java
-      artifactId = "utilities"   // stable, regardless of folder name
+      artifactId = "tutil"   // stable, regardless of folder name
     }
   }
   repositories {
