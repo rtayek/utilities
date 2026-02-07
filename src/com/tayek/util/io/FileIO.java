@@ -93,6 +93,32 @@ public class FileIO {
 		final BufferedReader r=new BufferedReader(new StringReader(Texts.cat(data)));
 		return toStrings(r);
 	}
+	public static Reader toReader(File file) {
+		Reader reader=null;
+		if(file.exists()&&file.canRead()) {
+			try {
+				reader=new FileReader(file);
+			} catch(IOException e) {
+				System.out.println(file+" toReader caught: "+e);
+			}
+		}
+		return reader;
+	}
+	public static Reader toReader(String string) {
+		return new StringReader(string);
+	}
+	public static BufferedReader toBufferedReader(String string) {
+		return new BufferedReader(new StringReader(string));
+	}
+	public static Writer toWriter(File file) {
+		Writer writer=null;
+		try {
+			writer=new FileWriter(file);
+		} catch(IOException e) {
+			System.out.println(file+" toWriter caught: "+e);
+		}
+		return writer;
+	}
 	public static void close(final Reader r) {
 		try {
 			r.close();
