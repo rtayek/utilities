@@ -5,13 +5,13 @@ import java.util.*;
 import java.util.concurrent.*;
 import org.junit.*;
 import org.junit.rules.TestRule;
-import com.tayek.MyTestWatcher;
 import com.tayek.util.log.LoggingHandler;
 import com.tayek.util.net.Net;
+import com.tayek.util.junit.BasicTestWatcher;
 import com.tayek.util.concurrent.Threads;
 import static com.tayek.util.io.Print.*;
 public class IOTestCase {
-    @Rule public TestRule watcher=new MyTestWatcher();
+    @Rule public TestRule watcher=new BasicTestWatcher();
 
     @BeforeClass public static void setUpBeforeClass() throws Exception {
         LoggingHandler.init();
@@ -73,3 +73,5 @@ public class IOTestCase {
     }
     String host;
 }
+
+

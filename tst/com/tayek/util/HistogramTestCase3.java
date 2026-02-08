@@ -2,10 +2,10 @@ package com.tayek.util;
 import static org.junit.Assert.*;
 import org.junit.*;
 import org.junit.rules.TestRule;
-import com.tayek.MyTestWatcher;
+import com.tayek.util.junit.BasicTestWatcher;
 import com.tayek.util.core.Histogram;
 public class HistogramTestCase3 {
-    @Rule public TestRule watcher=new MyTestWatcher();
+    @Rule public TestRule watcher=new BasicTestWatcher();
 
     @BeforeClass public static void setUpBeforeClass() throws Exception {}
     @AfterClass public static void tearDownAfterClass() throws Exception {}
@@ -153,3 +153,5 @@ public class HistogramTestCase3 {
     }
     Histogram histogram=new Histogram();
 }
+
+

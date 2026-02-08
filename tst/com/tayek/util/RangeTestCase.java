@@ -3,9 +3,9 @@ import static com.tayek.util.range.Range.*;
 import static org.junit.Assert.*;
 import org.junit.*;
 import org.junit.rules.TestRule;
-import com.tayek.MyTestWatcher;
+import com.tayek.util.junit.BasicTestWatcher;
 public class RangeTestCase {
-    @Rule public TestRule watcher=new MyTestWatcher();
+    @Rule public TestRule watcher=new BasicTestWatcher();
 
     
     @BeforeClass public static void setUpBeforeClass() throws Exception {}
@@ -20,3 +20,5 @@ public class RangeTestCase {
         assertTrue(range('a','z').contains('q'));
     }
 }
+
+

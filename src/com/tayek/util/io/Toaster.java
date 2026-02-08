@@ -39,7 +39,7 @@ interface Factory_ {
 class WindowsToaster implements Toaster {
     WindowsToaster() {}
     @Override public void toast(String string) {
-        //p(string);
+        p(string);
     }
     public static void main(String[] args) throws InterruptedException {
         Toaster toaster=Toaster.toaster;

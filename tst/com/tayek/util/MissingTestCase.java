@@ -10,11 +10,11 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import org.junit.*;
 import org.junit.rules.TestRule;
-import com.tayek.MyTestWatcher;
+import com.tayek.util.junit.BasicTestWatcher;
 import com.tayek.util.log.LoggingHandler;
 import com.tayek.util.range.Missing;
 public class MissingTestCase {
-    @Rule public TestRule watcher=new MyTestWatcher();
+    @Rule public TestRule watcher=new BasicTestWatcher();
 
     @Before public void setUp() throws Exception {
         LoggingHandler.init();
@@ -161,3 +161,5 @@ public class MissingTestCase {
     }
     Missing<Integer,Integer> m=Missing.factory.createNormal(0);
 }
+
+

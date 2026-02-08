@@ -2,12 +2,12 @@ package com.tayek.util.io;
 import static org.junit.Assert.*;
 import org.junit.*;
 import org.junit.rules.TestRule;
-import com.tayek.MyTestWatcher;
+import com.tayek.util.junit.BasicTestWatcher;
 import com.tayek.util.core.Android;
 import com.tayek.util.net.Net;
 import com.tayek.util.exec.Exec;
 public class ExecTestCase {
-    @Rule public TestRule watcher=new MyTestWatcher();
+    @Rule public TestRule watcher=new BasicTestWatcher();
     @BeforeClass public static void setUpBeforeClass() throws Exception {}
     @AfterClass public static void tearDownAfterClass() throws Exception {}
     @Before public void setUp() throws Exception {}
@@ -23,3 +23,5 @@ public class ExecTestCase {
         assertFalse(Exec.canWePing("notAHostName",5_000));
     }
 }
+
+
