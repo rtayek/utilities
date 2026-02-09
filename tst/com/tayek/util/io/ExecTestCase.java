@@ -15,10 +15,6 @@ public class ExecTestCase {
     @Test public void testPing127_0_0_1() throws InterruptedException {
         assertTrue(Exec.canWePing("127.0.0.1",5_000));
     }
-    @Test public void testNetwokInterface() throws InterruptedException {
-        if(Android.isAndroid()) assertTrue(Exec.canWePing(Net.tabletRouter,5_000));
-        else assertTrue(Exec.canWePing(Net.raysRouter,5_000));
-    }
     @Test public void testPingNotAHostName() throws InterruptedException {
         assertFalse(Exec.canWePing("notAHostName",5_000));
     }

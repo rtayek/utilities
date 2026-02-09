@@ -1,3 +1,5 @@
 resolve util and utilities naming here.
 
 maybe: logOrPrint()
+
+Net and NetRabbit have stuff that os tablet specific. separate and move net rabbit back to the rabbit project.

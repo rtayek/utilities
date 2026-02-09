@@ -11,11 +11,11 @@ repositories {
 }
 
 java {
-//  toolchain { languageVersion = JavaLanguageVersion.of(25) }
+  toolchain { languageVersion = JavaLanguageVersion.of(25) }
 }
 
 tasks.withType(JavaCompile).configureEach {
-  options.release = 17
+  options.release = 25
 }
 
 sourceSets {
@@ -33,7 +33,6 @@ sourceSets {
 
 dependencies {
   implementation "gnu.getopt:java-getopt:1.0.13"
-  compileOnly "junit:junit:4.13.2"
   testImplementation "junit:junit:4.13.2"
 }
 
