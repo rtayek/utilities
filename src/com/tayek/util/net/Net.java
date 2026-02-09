@@ -84,6 +84,24 @@ public class Net {
         Set<InetAddress> inetAddresses=addressesWith(prefix);
         p("addresses starting with: "+prefix+": "+inetAddresses);
     }
+    public static ServerSocket serverSocket(SocketAddress socketAddress) {
+        Et et=new Et();
+        ServerSocket serverSocket=null;
+        try {
+            serverSocket=new ServerSocket();
+            serverSocket.bind(socketAddress);
+        } catch(BindException e) {
+            e.printStackTrace();
+            p("after: "+et+",  caught: '"+e+"'");
+        } catch(IOException e) {
+            e.printStackTrace();
+            p("after: "+et+",  caught: '"+e+"'");
+        } catch(Exception e) {
+            e.printStackTrace();
+            p("after: "+et+",  caught: '"+e+"'");
+        }
+        return serverSocket;
+    }
     public static Socket silentConnect(SocketAddress socketAddress,int timeout) {
         Socket socket=new Socket();
         try {
@@ -120,6 +138,53 @@ public class Net {
             canConnect=false;
         }
         return canConnect;
+    }
+    public static Set<Pair<Integer,SocketAddress>> discover(boolean real,int n,int service) {
+        return discover(real,n,service,tabletRouterPrefix,defaultHost,testingHost);
+    }
+    public static Set<Pair<Integer,SocketAddress>> discover(boolean real,int n,int service,String tabletRouterPrefix,
+            String defaultHost,String testingHost) {
+        Set<Pair<Integer,SocketAddress>> socketAddresses=new LinkedHashSet<>();
+        Set<Pair<Integer,SocketAddress>> good=new LinkedHashSet<>();
+        if(real) {
+            for(int i=11;i<11+n;i++) // fragile!
+                socketAddresses.add(new Pair<Integer,SocketAddress>(i-10,new InetSocketAddress(tabletRouterPrefix+i,service)));
+        } else {
+            for(int i=1;i<=n;i++)
+                socketAddresses.add(new Pair<Integer,SocketAddress>(i,new InetSocketAddress(defaultHost,service+i)));
+            for(int i=1;i<=n;i++)
+                socketAddresses.add(new Pair<Integer,SocketAddress>(i,new InetSocketAddress(testingHost,service+i)));
+        }
+        int retries=3;
+        for(Pair<Integer,SocketAddress> pair:socketAddresses) {
+            p("trying : "+pair);
+            for(int i=1;i<=1+retries;i++) {
+                Socket socket=connect(pair.second,real?1_000:200);
+                if(socket!=null) {
+                    try {
+                        socket.close();
+                    } catch(IOException e) {
+                        p("caught: "+e);
+                        e.printStackTrace();
+                    }
+                    p("adding: "+pair);
+                    if(good.contains(pair)) p(good+" already contains: "+pair);
+                    good.add(pair);
+                    break;
+                }
+            }
+        }
+        return good;
+    }
+    public static Set<Pair<Integer,SocketAddress>> discoverTestTablets(int n,int serviceBase,String defaultHost,
+            String testingHost) {
+        return discover(false,n,serviceBase,tabletRouterPrefix,defaultHost,testingHost);
+    }
+    public static Set<Pair<Integer,SocketAddress>> discoverRealTablets(int n,int service,String tabletRouterPrefix) {
+        return discover(true,n,service,tabletRouterPrefix,defaultHost,testingHost);
+    }
+    public static String aTabletId(Integer tabletId) {
+        return "T"+tabletId;
     }
     public static final boolean isRaysPc=System.getProperty("user.dir").contains("D:\\");
     public static final boolean isLaptop=System.getProperty("user.dir").contains("C:\\Users\\");
