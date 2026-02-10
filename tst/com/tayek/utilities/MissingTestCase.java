@@ -11,7 +11,8 @@ import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.util.junit.BasicTestWatcher;
 import com.tayek.util.log.LoggingHandler;
-import com.tayek.utilities.MissingImpl;
+import com.tayek.util.range.Missing;
+import com.tayek.util.range.MissingImpl;
 import static com.tayek.util.io.Print.*;
 public class MissingTestCase {
     @Rule public TestRule watcher=new BasicTestWatcher(getClass());

@@ -5,8 +5,6 @@ import java.net.*;
 import java.util.*;
 import java.util.logging.Logger;
 import com.tayek.util.core.Et;
-import com.tayek.util.core.Pair;
-import com.tayek.util.exec.Exec;
 public class Net {
     public static String toString(ServerSocket serverSocket) {
         return serverSocket+": "+serverSocket.isBound()+" "+serverSocket.isClosed();
@@ -138,79 +136,6 @@ public class Net {
             canConnect=false;
         }
         return canConnect;
-    }
-    public static Set<Pair<Integer,SocketAddress>> discover(boolean real,int n,int service) {
-        return discover(real,n,service,tabletRouterPrefix,defaultHost,testingHost);
-    }
-    public static Set<Pair<Integer,SocketAddress>> discover(boolean real,int n,int service,String tabletRouterPrefix,
-            String defaultHost,String testingHost) {
-        Set<Pair<Integer,SocketAddress>> socketAddresses=new LinkedHashSet<>();
-        Set<Pair<Integer,SocketAddress>> good=new LinkedHashSet<>();
-        if(real) {
-            for(int i=11;i<11+n;i++) // fragile!
-                socketAddresses.add(new Pair<Integer,SocketAddress>(i-10,new InetSocketAddress(tabletRouterPrefix+i,service)));
-        } else {
-            for(int i=1;i<=n;i++)
-                socketAddresses.add(new Pair<Integer,SocketAddress>(i,new InetSocketAddress(defaultHost,service+i)));
-            for(int i=1;i<=n;i++)
-                socketAddresses.add(new Pair<Integer,SocketAddress>(i,new InetSocketAddress(testingHost,service+i)));
-        }
-        int retries=3;
-        for(Pair<Integer,SocketAddress> pair:socketAddresses) {
-            p("trying : "+pair);
-            for(int i=1;i<=1+retries;i++) {
-                Socket socket=connect(pair.second,real?1_000:200);
-                if(socket!=null) {
-                    try {
-                        socket.close();
-                    } catch(IOException e) {
-                        p("caught: "+e);
-                        e.printStackTrace();
-                    }
-                    p("adding: "+pair);
-                    if(good.contains(pair)) p(good+" already contains: "+pair);
-                    good.add(pair);
-                    break;
-                }
-            }
-        }
-        return good;
-    }
-    public static Set<Pair<Integer,SocketAddress>> discoverTestTablets(int n,int serviceBase,String defaultHost,
-            String testingHost) {
-        return discover(false,n,serviceBase,tabletRouterPrefix,defaultHost,testingHost);
-    }
-    public static Set<Pair<Integer,SocketAddress>> discoverRealTablets(int n,int service,String tabletRouterPrefix) {
-        return discover(true,n,service,tabletRouterPrefix,defaultHost,testingHost);
-    }
-    public static String aTabletId(Integer tabletId) {
-        return "T"+tabletId;
-    }
-    public static final boolean isRaysPc=System.getProperty("user.dir").contains("D:\\");
-    public static final boolean isLaptop=System.getProperty("user.dir").contains("C:\\Users\\");
-    public static final Integer defaultReceivePort=33000;
-    public static final String networkStub="192.168.";
-    public static final String tabletWifiSsid="\"tablets\"";
-    public static final String raysRouterPrefix="192.168.50.";
-	public static final String tabletRouterPrefix="192.168.50.";
-	public static final String tabletRouter="192.168.50.1"; // use current
-    public static final String raysRouter="192.168.50.1";
-    public static final String raysPc="192.168.50.50";
-    public static final String raysPcOnTabletNetworkToday="192.168.0.107"; // was 100
-    public static final String raysPcOnRaysNetwork="192.168.50.50"; // was 2
-    public static final String laptopToday="192.168.0.107"; // was 100
-    public static final String defaultHost=raysPcOnTabletNetworkToday;
-    public static final String testingHost=raysPcOnRaysNetwork;
-    public static final Map<Integer,String> androidIds=new TreeMap<>();
-    static {
-        androidIds.put(1,"0a9196e8"); // ab97465ca5e2af1a
-        androidIds.put(2,"0ab62080");
-        androidIds.put(3,"0ab63506"); // d0b9261d73d60b2c
-        androidIds.put(4,"0ab62207");
-        androidIds.put(5,"0b029b33"); // 3bcdcfbdd2cd4e42
-        androidIds.put(6,"0ab61d9b"); // 7c513f24bfe99daa
-        androidIds.put(7,"0b03ae31"); // #7 on 192.168.1.19
-        androidIds.put(8,"015d2109aa080e1a"); // my nexus 7 on 192.168.0.18
     }
     public static final Logger logger=Logger.getLogger(Net.class.getName());
 }

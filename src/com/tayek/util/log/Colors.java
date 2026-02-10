@@ -1,4 +1,4 @@
-package com.tayek.util;
+package com.tayek.util.log;
 import static java.lang.Math.*;
 import java.util.logging.Logger;
 public class Colors {

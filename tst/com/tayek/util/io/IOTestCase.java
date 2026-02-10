@@ -15,6 +15,8 @@ public class IOTestCase {
 
     @BeforeClass public static void setUpBeforeClass() throws Exception {
         LoggingHandler.init();
+        siteLocalHost=findSiteLocalHost();
+        if(siteLocalHost!=null) siteLocalPrefix=prefixFor(siteLocalHost);
     }
     @AfterClass public static void tearDownAfterClass() throws Exception {}
     @Before public void setUp() throws Exception {
@@ -31,36 +33,40 @@ public class IOTestCase {
         p(host+" get by name: "+InetAddress.getByName(host));
     }
     @Test public void testGetByName() throws InterruptedException,ExecutionException {
-        Net.GetByNameCallable task=new Net.GetByNameCallable(Net.testingHost);
+        Assume.assumeTrue(siteLocalHost!=null);
+        Net.GetByNameCallable task=new Net.GetByNameCallable(siteLocalHost);
         task.run();
         InetAddress inetAddress=task.inetAddress;
-        assertTrue(inetAddress.getHostAddress().contains(Net.testingHost));
+        assertTrue(inetAddress.getHostAddress().contains(siteLocalHost));
     }
     @Test public void testGetNetworkInterfacesWithHost() throws InterruptedException,ExecutionException {
-        Net.AddressesWithCallable addressesWithCallable=new Net.AddressesWithCallable(Net.testingHost);
+        Assume.assumeTrue(siteLocalHost!=null);
+        Net.AddressesWithCallable addressesWithCallable=new Net.AddressesWithCallable(siteLocalHost);
         addressesWithCallable.run();
         Set<InetAddress> inetAddresses=addressesWithCallable.addresses;
         assertTrue(inetAddresses.size()>0);
         if(inetAddresses.size()>1) p("more than one nic: "+inetAddresses);
         InetAddress inetAddress=inetAddresses.iterator().next();
-        assertTrue(inetAddress.getHostAddress().contains(Net.testingHost));
+        assertTrue(inetAddress.getHostAddress().contains(siteLocalHost));
     }
     @Test public void testGetNetworkInterfacesWithNetworkPrefix() throws InterruptedException,ExecutionException {
         // you will need a wireless nic or be able to plug in to the real network for this to work
-        Net.AddressesWithCallable addressesWithCallable=new Net.AddressesWithCallable(Net.testingHost);
+        Assume.assumeTrue(siteLocalHost!=null);
+        Net.AddressesWithCallable addressesWithCallable=new Net.AddressesWithCallable(siteLocalHost);
         addressesWithCallable.run();
         Set<InetAddress> inetAddresses=addressesWithCallable.addresses;
         assertTrue(inetAddresses.size()>0);
         if(inetAddresses.size()>1) p("more than one nic: "+inetAddresses);
         InetAddress inetAddress=inetAddresses.iterator().next();
         assertTrue(inetAddress!=null);
-        p("checking: "+inetAddress+" for: "+Net.tabletRouterPrefix );
+        p("checking: "+inetAddress+" for: "+siteLocalPrefix);
         // this is failing, looks like i may have changed testing host from 0 network.
-        assertTrue(inetAddress.getHostAddress().contains(Net.tabletRouterPrefix));
+        assertTrue(inetAddress.getHostAddress().contains(siteLocalPrefix));
     }
     @Test public void testGetNetworkInterfacesWithNetworkPrefix192dot168() throws InterruptedException,ExecutionException {
         // you will need a wireless nic or be able to plug in to the real network for this to work
-        Net.AddressesWithCallable addressesWithCallable=new Net.AddressesWithCallable(Net.testingHost);
+        Assume.assumeTrue(siteLocalHost!=null);
+        Net.AddressesWithCallable addressesWithCallable=new Net.AddressesWithCallable(siteLocalHost);
         addressesWithCallable.run();
         Set<InetAddress> inetAddresses=addressesWithCallable.addresses;
         assertTrue(inetAddresses.size()>0);
@@ -68,10 +74,26 @@ public class IOTestCase {
         boolean foundOne=false;
         // this is also failing, looks like i may have changed testing host from 0 network.
         for(InetAddress inetAddress:inetAddresses)
-            if(inetAddress.getHostAddress().contains(Net.tabletRouterPrefix)) foundOne=true;
+            if(inetAddress.getHostAddress().contains(siteLocalPrefix)) foundOne=true;
         assertTrue(foundOne);
     }
     String host;
+    static String siteLocalHost;
+    static String siteLocalPrefix;
+    static String prefixFor(String hostAddress) {
+        int lastDot=hostAddress.lastIndexOf('.');
+        return lastDot==-1?hostAddress:hostAddress.substring(0,lastDot+1);
+    }
+    static String findSiteLocalHost() throws SocketException {
+        Enumeration<NetworkInterface> networkInterfaces=NetworkInterface.getNetworkInterfaces();
+        for(NetworkInterface networkInterface:Collections.list(networkInterfaces)) {
+            for(InetAddress inetAddress:Collections.list(networkInterface.getInetAddresses())) {
+                if(inetAddress instanceof Inet4Address&&inetAddress.isSiteLocalAddress())
+                    return inetAddress.getHostAddress();
+            }
+        }
+        return null;
+    }
 }
 
 

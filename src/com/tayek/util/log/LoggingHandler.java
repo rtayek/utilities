@@ -224,10 +224,11 @@ public class LoggingHandler {
     public static final int defaultLogServerService=5000;
     public static final int chainsawLogServerService=2222;
     public static final int lilithLogServerService=11020;
+    public static final String defaultLogServerHost="localhost"; // was laptop today
     public static final Map<Pair<String,Integer>,SocketHandler> logServerHosts=new LinkedHashMap<>();
     static {
         for(Integer service:new Integer[] {defaultLogServerService,/*chainsawLogServerService,lilithLogServerService,*/}) {
-            logServerHosts.put(new Pair<String,Integer>(Net.laptopToday,service),null);
+            logServerHosts.put(new Pair<String,Integer>(defaultLogServerHost,service),null);
         }
     }
     public static final Logger logger=Logger.getLogger(LoggingHandler.class.getName());

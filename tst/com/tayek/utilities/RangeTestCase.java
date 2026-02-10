@@ -4,8 +4,7 @@ import java.util.Date;
 import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.util.junit.BasicTestWatcher;
-import com.tayek.utilities.Range;
-import static com.tayek.utilities.Range.*;
+import static com.tayek.util.range.Range.*;
 public class RangeTestCase {
     @Rule public TestRule watcher=new BasicTestWatcher(getClass());
 
