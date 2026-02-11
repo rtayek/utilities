@@ -1,4 +1,4 @@
-package com.tayek.util.io;
+package com.tayek.util.misc;
 import java.io.*;
 import java.util.*;
 public class Tee extends FilterOutputStream {
@@ -19,14 +19,14 @@ public class Tee extends FilterOutputStream {
 	}
 	public synchronized void write(int b) throws IOException {
 		for(Enumeration<OutputStream> e=stream.elements();e.hasMoreElements();) {
-			OutputStream out=e.nextElement();
+			OutputStream out=(OutputStream)e.nextElement();
 			out.write(b);
 			out.flush();
 		}
 	}
 	public synchronized void write(byte[] data,int offset,int length) throws IOException {
 		for(Enumeration<OutputStream> e=stream.elements();e.hasMoreElements();) {
-			OutputStream out=e.nextElement();
+			OutputStream out=(OutputStream)e.nextElement();
 			out.write(data,offset,length);
 			out.flush();
 		}

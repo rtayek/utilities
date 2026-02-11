@@ -1,6 +1,7 @@
-package com.tayek.util;
+package com.tayek.util.core;
 import java.io.*;
 import java.util.*;
+import com.tayek.util.core.StringUtilities;
 import junit.framework.*;
 public class StringUtilitiesTestCase extends TestCase {
 	public StringUtilitiesTestCase(java.lang.String testName) {

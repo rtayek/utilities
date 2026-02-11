@@ -1,8 +1,11 @@
-package com.tayek.util;
+package com.tayek.util.misc;
+import static org.junit.Assert.*;
 import org.junit.*;
+import org.junit.Test;
 import org.junit.rules.TestRule;
 import com.tayek.util.core.Histogram;
 import com.tayek.util.junit.BasicTestWatcher;
+import org.junit.Test;
 /*
 public class HistogramTestCase {
         @Before public void setUp() throws Exception {}
@@ -16,7 +19,7 @@ import junit.framework.*;
 import java.util.*;
 import java.util.logging.*;
 public class HistogramTestCase extends TestCase {
-    @Rule public TestRule watcher=new BasicTestWatcher();
+    @Rule public TestRule watcher=new BasicTestWatcher(getClass());
 
     public HistogramTestCase(String name) {
         super(name);

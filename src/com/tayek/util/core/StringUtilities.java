@@ -1,4 +1,4 @@
-package com.tayek.util;
+package com.tayek.util.core;
 import java.io.*; 
 import java.util.*;
 public class StringUtilities {

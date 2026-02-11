@@ -1,11 +1,12 @@
-package com.tayek.util;
-import static com.tayek.util.range.Range.*;
+package com.tayek.util.misc;
 import static org.junit.Assert.*;
+import java.util.Date;
 import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.util.junit.BasicTestWatcher;
+import static com.tayek.util.range.Range.*;
 public class RangeTestCase {
-    @Rule public TestRule watcher=new BasicTestWatcher();
+    @Rule public TestRule watcher=new BasicTestWatcher(getClass());
 
     
     @BeforeClass public static void setUpBeforeClass() throws Exception {}

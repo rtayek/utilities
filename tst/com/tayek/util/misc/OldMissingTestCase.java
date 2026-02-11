@@ -1,4 +1,4 @@
-package com.tayek.util;
+package com.tayek.util.misc;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

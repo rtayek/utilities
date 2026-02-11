@@ -1,4 +1,4 @@
-package com.tayek.utilities;
+package com.tayek.util.misc;
 import static com.tayek.util.io.Print.*;
 import java.io.*;
 import java.net.*;

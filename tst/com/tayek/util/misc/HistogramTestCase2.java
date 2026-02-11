@@ -1,7 +1,8 @@
-package com.tayek.utilities;
+package com.tayek.util.misc;
 import static org.junit.Assert.*;
 import org.junit.*;
 import org.junit.rules.TestRule;
+import com.tayek.util.core.Histogram;
 import com.tayek.util.junit.BasicTestWatcher;
 public class HistogramTestCase2 {
     @Rule public TestRule watcher=new BasicTestWatcher(getClass());

@@ -1,4 +1,4 @@
-package com.tayek.utilities;
+package com.tayek.util.misc;
 import java.io.*;
 import java.net.URL;
 import java.util.*;

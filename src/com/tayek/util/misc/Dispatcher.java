@@ -1,4 +1,4 @@
-package com.tayek.utilities;
+package com.tayek.util.misc;
 import com.tayek.util.core.CPair;
 import static com.tayek.util.concurrent.Threads.printThreads;
 import java.io.*;
