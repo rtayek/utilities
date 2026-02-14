@@ -28,15 +28,7 @@ public class FileIO {
 		}
 	}
 	public static void toFile(final String s,final File file) {
-		try {
-			Writer out=new FileWriter(file);
-			out.write(s);
-			out.close();
-		} catch(FileNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch(IOException e) {
-			throw new RuntimeException(e);
-		}
+		write(s,file);
 	}
 	public static void p(File file) {
 		try {
@@ -64,6 +56,20 @@ public class FileIO {
 			e.printStackTrace();
 		}
 	}
+	public static String toString(final Reader reader) throws IOException {
+		if(reader==null) return null;
+		try {
+			StringBuilder sb=new StringBuilder();
+			for(int c=reader.read();c!=-1;c=reader.read())
+				sb.append((char)c);
+			return sb.toString();
+		} finally {
+			reader.close();
+		}
+	}
+	public static String toString(final File file) throws FileNotFoundException,IOException {
+		return file!=null?toString(new BufferedReader(new FileReader(file))):null;
+	}
 	public static String fromReader(final Reader reader) {
 		StringBuffer stringBuffer=new StringBuffer();
 		fromReader(stringBuffer,reader);
@@ -84,26 +90,34 @@ public class FileIO {
 		return stringBuffer.toString();
 	}
 	public static List<String> toStrings(final BufferedReader r) {
-		final List<String> l=new LinkedList<String>();
-		String line=null;
 		try {
-			for(line=r.readLine();(line=r.readLine())!=null;)
-				l.add(line);
+			return toStrings((Reader)r);
 		} catch(IOException e) {
-			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		return l;
+	}
+	public static List<String> toStrings(final Reader reader) throws IOException {
+		if(reader==null) return Collections.emptyList();
+		final BufferedReader bufferedReader=reader instanceof BufferedReader?(BufferedReader)reader:new BufferedReader(reader);
+		try {
+			final List<String> lines=new LinkedList<String>();
+			for(String line=bufferedReader.readLine();line!=null;line=bufferedReader.readLine())
+				lines.add(line);
+			return lines;
+		} finally {
+			bufferedReader.close();
+		}
+	}
+	public static List<String> toStrings(final File file) throws IOException {
+		return file!=null?toStrings(new FileReader(file)):Collections.emptyList();
 	}
 	public static List<String> getListOfLines(BufferedReader bufferedReader) {
-		List<String> list=new LinkedList<String>();
 		try {
-			for(String line=bufferedReader.readLine();line!=null;line=bufferedReader.readLine())
-				list.add(line);
-		} catch(IOException e) {
+			return toStrings(bufferedReader);
+		} catch(RuntimeException e) {
 			System.out.println(e);
+			return Collections.emptyList();
 		}
-		return list;
 	}
 	public static String get(BufferedReader bufferedReader) {
 		StringBuffer stringBuffer=new StringBuffer();
@@ -192,26 +206,16 @@ public class FileIO {
 		return string.toString();
 	}
 	public static void write(final String string,final File file) {
-		try {
-			FileWriter fileWriter=new FileWriter(file);
-			BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
+		try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(file))) {
 			bufferedWriter.write(string);
-			bufferedWriter.flush();
-			bufferedWriter.close();
-			fileWriter.close();
-			//System.out.println("Created file: "+file.getName());
 		} catch(Throwable t) {
 			t.printStackTrace();
 			throw new RuntimeException("can not write file: "+file);
 		}
 	}
 	public static List<String> getFileAsListOfStrings(final File file) {
-		BufferedReader r=null;
 		try {
-			r=new BufferedReader(new FileReader(file));
-			final List<String> l=toStrings(r);
-			r.close();
-			return l;
+			return toStrings(file);
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}

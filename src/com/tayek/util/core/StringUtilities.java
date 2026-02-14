@@ -1,6 +1,7 @@
 package com.tayek.util.core;
 import java.io.*; 
 import java.util.*;
+import com.tayek.util.io.FileIO;
 public class StringUtilities {
 	// many of these string utilities will return null or empty lists if given a null!
 	public static String toString(final String[] s) {
@@ -23,30 +24,6 @@ public class StringUtilities {
 			}
 		}
 		return s;
-	}
-	public static String toString(final Reader reader) throws IOException {
-		if(reader==null) return null;
-		StringBuffer sb=new StringBuffer();
-		for(int c=reader.read();c!=-1;c=reader.read())
-			sb.append((char)c);
-		reader.close();
-		return sb.toString();
-	}
-	public static String toString(final File file) throws FileNotFoundException,IOException {
-		return file!=null?toString(new BufferedReader(new FileReader(file))):null;
-	}
-	public static List<String> toStrings(final Reader reader) throws IOException {
-		List<String> l=new LinkedList<String>();
-		if(reader!=null) {
-			final BufferedReader r=reader instanceof BufferedReader?(BufferedReader)reader:new BufferedReader(reader);
-			for(String line=r.readLine();line!=null;line=r.readLine())
-				l.add(line);
-			r.close();
-		}
-		return l;
-	}
-	public static List<String> toStrings(final File file) throws FileNotFoundException,IOException {
-		return file!=null?toStrings(new BufferedReader(new FileReader(file))):Collections.emptyList();
 	}
 	public static Reader toReader(final String s) {
 		return s!=null?new StringReader(s):null;

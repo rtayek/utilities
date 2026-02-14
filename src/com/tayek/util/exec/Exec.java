@@ -55,6 +55,15 @@ public class Exec {
     public void print() {
         print(rc,output,error);
     }
+    public int rc() {
+        return rc;
+    }
+    public String output() {
+        return output;
+    }
+    public String error() {
+        return error;
+    }
     public static void print(int rc,String output,String error) {
         p("return code: "+rc);
         p("output: '"+output+"'");

@@ -17,6 +17,9 @@ public class Tee extends FilterOutputStream {
 	public synchronized void addOutputStream(OutputStream out) {
 		stream.addElement(out);
 	}
+	protected final Vector<OutputStream> outputs() {
+		return stream;
+	}
 	public synchronized void write(int b) throws IOException {
 		for(Enumeration<OutputStream> e=stream.elements();e.hasMoreElements();) {
 			OutputStream out=(OutputStream)e.nextElement();
@@ -51,5 +54,5 @@ public class Tee extends FilterOutputStream {
 			return null;
 		}
 	}
-	Vector<OutputStream> stream=new Vector<OutputStream>();
+	private final Vector<OutputStream> stream=new Vector<OutputStream>();
 }
