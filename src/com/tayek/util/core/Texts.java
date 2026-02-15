@@ -1,8 +1,38 @@
 package com.tayek.util.core;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.stream.IntStream;
 public class Texts {
+	public static String pad(String string,int length) {
+		for(;string.length()<length;string+=' ')
+			;
+		return string;
+	}
+	public static String toString(final String[] strings) {
+		return strings!=null?toString(Arrays.asList(strings).iterator(),null,false):null;
+	}
+	public static String toString(final Iterator<String> iterator) {
+		return toString(iterator,null,false);
+	}
+	public static String toString(final String[] strings,final String separator,final boolean addSeparatorAtEnd) {
+		return toString(Arrays.asList(strings).iterator(),separator,addSeparatorAtEnd);
+	}
+	public static String toString(final Iterator<String> iterator,final String separator,final boolean addSeparatorAtEnd) {
+		String s=null;
+		if(iterator!=null&&iterator.hasNext()) {
+			final StringBuilder sb=new StringBuilder();
+			for(;iterator.hasNext();) {
+				sb.append(iterator.next());
+				if(separator!=null&&(iterator.hasNext()||addSeparatorAtEnd)) sb.append(separator);
+				s=sb.toString();
+			}
+		}
+		return s;
+	}
 	public static boolean isLineFeedOrCarriageReturn(Character character) {
 		return character.equals('\n')||character.equals('\r');
 	}
@@ -24,6 +54,65 @@ public class Texts {
 			sb.append(c);
 		}
 		return sb.toString();
+	}
+	public static String quote(final String string,final String quoted) {
+		StringBuilder sb=new StringBuilder();
+		for(int i=0;i<string.length();i++) {
+			char c=string.charAt(i);
+			if(quoted.indexOf(c)!=-1) {
+				switch(c) {
+					case '\r':
+						sb.append('\\').append('r');
+						break;
+					case '\n':
+						sb.append('\\').append('n');
+						break;
+					case '\t':
+						sb.append('\\').append('t');
+						break;
+					default:
+						sb.append('\\').append(c);
+						break;
+				}
+			} else sb.append(c);
+		}
+		return sb.toString();
+	}
+	public static String unQuote(final String string) {
+		StringBuilder sb=new StringBuilder();
+		for(int i=0;i<string.length();i++) {
+			char c=string.charAt(i);
+			if(c!='\\') sb.append(c);
+			else switch(string.charAt(i++)) {
+				case 'r':
+					sb.append('\r');
+					break;
+				case 'n':
+					sb.append('\n');
+					break;
+				case 't':
+					sb.append('\t');
+					break;
+				default:
+					sb.append(c);
+					break;
+			}
+		}
+		return sb.toString();
+	}
+	public static String quote(final String string,final Map<Character,String> map) {
+		StringBuilder sb=new StringBuilder();
+		for(int i=0;i<string.length();i++) {
+			char c=string.charAt(i);
+			Character ch=Character.valueOf(c);
+			String replacement=map.get(ch);
+			if(replacement!=null) sb.append(replacement);
+			else sb.append(c);
+		}
+		return sb.toString();
+	}
+	public static String quoteXml(final String string) {
+		return quote(string,xmlQuoteMap);
 	}
 	public static String cat(final String[] data) {
 		final StringBuffer sb=new StringBuffer();
@@ -83,5 +172,12 @@ public class Texts {
 	}
 	public static Character[] toObjects(char[] characters) {
 		return IntStream.range(0,characters.length).mapToObj(i->characters[i]).toArray(Character[]::new);
+	}
+	public static final String[] emptyStringArray=new String[0];
+	static final Map<Character,String> xmlQuoteMap=new HashMap<Character,String>();
+	static {
+		xmlQuoteMap.put(Character.valueOf('&'),"&amp;");
+		xmlQuoteMap.put(Character.valueOf('<'),"&lt;");
+		xmlQuoteMap.put(Character.valueOf('>'),"&gt;");
 	}
 }

@@ -1,6 +1,8 @@
 package com.tayek.util.io;
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +31,21 @@ public class FileIO {
 	}
 	public static void toFile(final String s,final File file) {
 		write(s,file);
+	}
+	public static void toNewFile(final String string,final File file) throws IOException {
+		boolean justDeleted=false;
+		if(file.exists()) {
+			if(file.canWrite()) {
+				file.delete();
+				justDeleted=true;
+			} else throw new RuntimeException("attempt to delete non writable file: "+file);
+		}
+		try(Writer out=new BufferedWriter(new FileWriter(file))) {
+			out.write(string);
+		} catch(FileNotFoundException e) {
+			System.err.println("got a "+e+" with justDeleted="+justDeleted);
+			throw e;
+		}
 	}
 	public static void p(File file) {
 		try {
@@ -109,7 +126,7 @@ public class FileIO {
 		}
 	}
 	public static List<String> toStrings(final File file) throws IOException {
-		return file!=null?toStrings(new FileReader(file)):Collections.emptyList();
+		return file!=null?Files.readAllLines(file.toPath(),Charset.defaultCharset()):Collections.emptyList();
 	}
 	public static List<String> getListOfLines(BufferedReader bufferedReader) {
 		try {
@@ -236,7 +253,11 @@ public class FileIO {
 		return reader;
 	}
 	public static Reader toReader(String string) {
-		return new StringReader(string);
+		return string!=null?new StringReader(string):null;
+	}
+	public static Reader toReader(String[] strings) {
+		String value=Texts.toString(strings);
+		return value!=null?new StringReader(value):null;
 	}
 	public static BufferedReader toBufferedReader(String string) {
 		return new BufferedReader(new StringReader(string));
@@ -249,6 +270,9 @@ public class FileIO {
 			System.out.println(file+" toWriter caught: "+e);
 		}
 		return writer;
+	}
+	public static Writer toWriterOrThrow(File file) throws IOException {
+		return new FileWriter(file);
 	}
 	public static void close(final Reader r) {
 		try {

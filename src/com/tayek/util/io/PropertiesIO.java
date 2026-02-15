@@ -1,10 +1,13 @@
 package com.tayek.util.io;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.Properties;
-import com.tayek.util.misc.P;
 public class PropertiesIO {
     private static Properties withDefaults(Properties defaults) {
         Properties properties=new Properties();
@@ -15,40 +18,81 @@ public class PropertiesIO {
         if(context!=null&&context.getResource(filename)!=null) return true;
         return new File(filename).exists();
     }
+    private static void loadFromFile(Properties properties,File file) {
+        try(InputStream in=new FileInputStream(file)) {
+            properties.load(in);
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private static void loadFromUrl(Properties properties,String filename,URL url) {
+        if(url!=null) {
+            try(InputStream in=url.openStream()) {
+                if(in!=null) properties.load(in);
+                else System.out.println("properties stream is null for url: "+url);
+            } catch(IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else System.out.println("url is null for filename: "+filename);
+    }
     public static void loadPropertiesFile(Properties properties,String filename) {
-        P.loadPropertiesFile(properties,filename);
+        loadFromFile(properties,new File(filename));
     }
     public static void loadPropertiesFile(Properties properties,Class<?> context,String filename) {
         if(context!=null) {
             URL url=context.getResource(filename);
             if(url!=null) {
-                P.load(properties,filename,url);
+                loadFromUrl(properties,filename,url);
                 return;
             }
         }
-        P.loadPropertiesFile(properties,filename);
+        loadPropertiesFile(properties,filename);
     }
     public static void writePropertiesFile(Properties properties,String filename) {
-        P.writePropertiesFile(properties,filename);
+        try {
+            File file=new File(filename);
+            System.out.println("writing new properties to: "+filename+": "+properties);
+            properties.store(new FileOutputStream(file),"initial");
+        } catch(FileNotFoundException e) {
+            System.out.println("properties caught: "+e+" property file was not written!");
+        } catch(IOException e) {
+            System.out.println("properties caught: "+e+" property file was not written!");
+        }
     }
     public static void writePropertiesFile(Properties properties,Class<?> context,String filename) {
         if(context!=null) {
             URL url=context.getResource(filename);
             if(url!=null&&"file".equals(url.getProtocol())) {
-                P.store(new File(url.getPath()),properties);
+                store(new File(url.getPath()),properties);
                 return;
             }
         }
-        P.writePropertiesFile(properties,filename);
+        writePropertiesFile(properties,filename);
     }
     public static Properties load(final InputStream inputStream) {
-        return P.load(inputStream);
+        final Properties properties=new Properties(defaultProperties);
+        try {
+            properties.load(inputStream);
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+        return properties;
     }
     public static void store(final OutputStream outputStream,final Properties properties) {
-        P.store(outputStream,properties);
+        try {
+            properties.store(outputStream,null);
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public static void store(final File propertiesFile,final Properties properties) {
-        P.store(propertiesFile,properties);
+        try(OutputStream out=new FileOutputStream(propertiesFile)) {
+            store(out,properties);
+        } catch(FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public static Properties loadOrCreatePropertiesFile(Properties defaults,String filename) {
         Properties properties=withDefaults(defaults);
@@ -62,5 +106,8 @@ public class PropertiesIO {
         else writePropertiesFile(properties,context,filename);
         return properties;
     }
-    public static final Properties defaultProperties=P.defaultProperties;
+    public static final Properties defaultProperties=new Properties();
+    static {
+        /* add some properties */
+    }
 }
