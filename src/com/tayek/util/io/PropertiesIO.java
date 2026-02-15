@@ -1,12 +1,10 @@
 package com.tayek.util.io;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Properties;
 public class PropertiesIO {
     private static Properties withDefaults(Properties defaults) {
@@ -19,7 +17,7 @@ public class PropertiesIO {
         return new File(filename).exists();
     }
     private static void loadFromFile(Properties properties,File file) {
-        try(InputStream in=new FileInputStream(file)) {
+        try(InputStream in=Files.newInputStream(file.toPath())) {
             properties.load(in);
         } catch(IOException e) {
             throw new RuntimeException(e);
@@ -52,9 +50,9 @@ public class PropertiesIO {
         try {
             File file=new File(filename);
             System.out.println("writing new properties to: "+filename+": "+properties);
-            properties.store(new FileOutputStream(file),"initial");
-        } catch(FileNotFoundException e) {
-            System.out.println("properties caught: "+e+" property file was not written!");
+            try(OutputStream out=Files.newOutputStream(file.toPath())) {
+                properties.store(out,"initial");
+            }
         } catch(IOException e) {
             System.out.println("properties caught: "+e+" property file was not written!");
         }
@@ -85,11 +83,23 @@ public class PropertiesIO {
             throw new RuntimeException(e);
         }
     }
-    public static void store(final File propertiesFile,final Properties properties) {
-        try(OutputStream out=new FileOutputStream(propertiesFile)) {
-            store(out,properties);
-        } catch(FileNotFoundException e) {
+    public static void storeXml(final OutputStream outputStream,final Properties properties) {
+        try {
+            properties.storeToXML(outputStream,null);
+        } catch(IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public static void store(final File propertiesFile,final Properties properties) {
+        try(OutputStream out=Files.newOutputStream(propertiesFile.toPath())) {
+            store(out,properties);
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void storeXml(final File propertiesFile,final Properties properties) {
+        try(OutputStream out=Files.newOutputStream(propertiesFile.toPath())) {
+            storeXml(out,properties);
         } catch(IOException e) {
             throw new RuntimeException(e);
         }

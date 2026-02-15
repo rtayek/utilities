@@ -3,6 +3,7 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,11 +21,7 @@ public class FileIO {
 	}
 	public static void toFile(final byte[] b,final File file) {
 		try {
-			OutputStream out=new FileOutputStream(file);
-			out.write(b);
-			out.close();
-		} catch(FileNotFoundException e) {
-			throw new RuntimeException(e);
+			Files.write(file.toPath(),b);
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -36,13 +33,14 @@ public class FileIO {
 		boolean justDeleted=false;
 		if(file.exists()) {
 			if(file.canWrite()) {
-				file.delete();
+				Files.delete(file.toPath());
 				justDeleted=true;
 			} else throw new RuntimeException("attempt to delete non writable file: "+file);
 		}
-		try(Writer out=new BufferedWriter(new FileWriter(file))) {
-			out.write(string);
-		} catch(FileNotFoundException e) {
+		try {
+			Files.writeString(file.toPath(),string,Charset.defaultCharset(),StandardOpenOption.CREATE,
+					StandardOpenOption.TRUNCATE_EXISTING);
+		} catch(IOException e) {
 			System.err.println("got a "+e+" with justDeleted="+justDeleted);
 			throw e;
 		}
@@ -85,7 +83,7 @@ public class FileIO {
 		}
 	}
 	public static String toString(final File file) throws FileNotFoundException,IOException {
-		return file!=null?toString(new BufferedReader(new FileReader(file))):null;
+		return file!=null?Files.readString(file.toPath(),Charset.defaultCharset()):null;
 	}
 	public static String fromReader(final Reader reader) {
 		StringBuffer stringBuffer=new StringBuffer();
@@ -93,11 +91,9 @@ public class FileIO {
 		return stringBuffer.toString();
 	}
 	public static void fromFile(final StringBuffer stringBuffer,final File file) {
-		Reader r=null;
 		try {
-			r=new FileReader(file);
-			fromReader(stringBuffer,r);
-		} catch(FileNotFoundException e) {
+			stringBuffer.append(Files.readString(file.toPath(),Charset.defaultCharset()));
+		} catch(IOException e) {
 			System.out.println(file+" fromFile caught: "+e);
 		}
 	}
@@ -205,26 +201,18 @@ public class FileIO {
 			System.out.println("can not read file: ="+file);
 			return null;
 		}
-		BufferedReader bufferedReader=null;
 		String string=null;
-		try {
-			bufferedReader=new BufferedReader(new FileReader(file));
+		try(BufferedReader bufferedReader=Files.newBufferedReader(file.toPath(),Charset.defaultCharset())) {
 			string=get(bufferedReader);
 		} catch(IOException e) {
 			System.out.println(e);
-		} finally {
-			if(bufferedReader!=null)
-				try {
-					bufferedReader.close();
-				} catch(Exception e) {
-					System.out.println(e);
-				}
 		}
-		return string.toString();
+		return string!=null?string.toString():null;
 	}
 	public static void write(final String string,final File file) {
-		try(BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(file))) {
-			bufferedWriter.write(string);
+		try {
+			Files.writeString(file.toPath(),string,Charset.defaultCharset(),StandardOpenOption.CREATE,
+					StandardOpenOption.TRUNCATE_EXISTING);
 		} catch(Throwable t) {
 			t.printStackTrace();
 			throw new RuntimeException("can not write file: "+file);
@@ -245,7 +233,7 @@ public class FileIO {
 		Reader reader=null;
 		if(file.exists()&&file.canRead()) {
 			try {
-				reader=new FileReader(file);
+				reader=Files.newBufferedReader(file.toPath(),Charset.defaultCharset());
 			} catch(IOException e) {
 				System.out.println(file+" toReader caught: "+e);
 			}
@@ -265,14 +253,16 @@ public class FileIO {
 	public static Writer toWriter(File file) {
 		Writer writer=null;
 		try {
-			writer=new FileWriter(file);
+			writer=Files.newBufferedWriter(file.toPath(),Charset.defaultCharset(),StandardOpenOption.CREATE,
+					StandardOpenOption.TRUNCATE_EXISTING);
 		} catch(IOException e) {
 			System.out.println(file+" toWriter caught: "+e);
 		}
 		return writer;
 	}
 	public static Writer toWriterOrThrow(File file) throws IOException {
-		return new FileWriter(file);
+		return Files.newBufferedWriter(file.toPath(),Charset.defaultCharset(),StandardOpenOption.CREATE,
+				StandardOpenOption.TRUNCATE_EXISTING);
 	}
 	public static void close(final Reader r) {
 		try {

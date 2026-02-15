@@ -1,5 +1,6 @@
 package com.tayek.util.io;
 import java.io.*;
+import java.nio.file.Files;
 public class Serialization {
 	public static byte[] save(final Object o) {
 		try {
@@ -33,8 +34,7 @@ public class Serialization {
 		}
 	}
 	public static Object restore(final File file) {
-		try {
-			ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
+		try(ObjectInputStream in=new ObjectInputStream(Files.newInputStream(file.toPath()))) {
 			return restore(in);
 		} catch(IOException e) {
 			throw new RuntimeException(e);

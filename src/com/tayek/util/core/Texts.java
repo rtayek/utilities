@@ -3,10 +3,19 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.stream.IntStream;
 public class Texts {
+	public static String getString(String key,ResourceBundle resourceBundle) {
+		String string=null;
+		try {
+			string=resourceBundle.getString(key);
+		} catch(MissingResourceException e) {}
+		return string;
+	}
 	public static String pad(String string,int length) {
 		for(;string.length()<length;string+=' ')
 			;

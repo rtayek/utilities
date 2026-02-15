@@ -1,5 +1,7 @@
 package com.tayek.util.misc;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 public class Tee extends FilterOutputStream {
 	// make this into a writer or make a version for writers
@@ -55,8 +57,8 @@ public class Tee extends FilterOutputStream {
 	public static Tee tee(File file,boolean delete) {
 		if(delete&&file.exists()&&!file.delete()) System.out.println(file+" was not deleted!");
 		try {
-			FileOutputStream fileOutputStream=new FileOutputStream(file.toString(),true);
-			Tee tee=new Tee(fileOutputStream);
+			OutputStream outputStream=Files.newOutputStream(file.toPath(),StandardOpenOption.CREATE,StandardOpenOption.APPEND);
+			Tee tee=new Tee(outputStream);
 			tee.addOutputStream(System.out);
 			tee.addOutputStream(System.err);
 			tee.setOut();
