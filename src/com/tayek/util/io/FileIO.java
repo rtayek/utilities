@@ -38,8 +38,7 @@ public class FileIO {
 			} else throw new RuntimeException("attempt to delete non writable file: "+file);
 		}
 		try {
-			Files.writeString(file.toPath(),string,Charset.defaultCharset(),StandardOpenOption.CREATE,
-					StandardOpenOption.TRUNCATE_EXISTING);
+			Files.writeString(file.toPath(),string,Charset.defaultCharset(),StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
 		} catch(IOException e) {
 			System.err.println("got a "+e+" with justDeleted="+justDeleted);
 			throw e;
@@ -142,7 +141,8 @@ public class FileIO {
 		}
 		return stringBuffer.toString();
 	}
-	public static List<String> getAsListOfStrings(URL url) { // get url as list of strings
+	public static List<String> getAsListOfStrings(URL url) { // get url as list
+																// of strings
 		List<String> list=null;
 		BufferedReader bufferedReader=null;
 		InputStream inputStream=null;
@@ -160,12 +160,11 @@ public class FileIO {
 		} catch(IOException e) {
 			e.printStackTrace();
 		} finally {
-			if(bufferedReader!=null)
-				try {
-					bufferedReader.close();
-				} catch(IOException e) {
-					e.printStackTrace();
-				}
+			if(bufferedReader!=null) try {
+				bufferedReader.close();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return Collections.emptyList();
 	}
@@ -186,12 +185,11 @@ public class FileIO {
 		} catch(IOException e) {
 			System.out.println(e);
 		} finally {
-			if(bufferedReader!=null)
-				try {
-					bufferedReader.close();
-				} catch(IOException e) {
-					System.out.println(e);
-				}
+			if(bufferedReader!=null) try {
+				bufferedReader.close();
+			} catch(IOException e) {
+				System.out.println(e);
+			}
 		}
 		// may return an partial result!
 		return string;
@@ -211,8 +209,7 @@ public class FileIO {
 	}
 	public static void write(final String string,final File file) {
 		try {
-			Files.writeString(file.toPath(),string,Charset.defaultCharset(),StandardOpenOption.CREATE,
-					StandardOpenOption.TRUNCATE_EXISTING);
+			Files.writeString(file.toPath(),string,Charset.defaultCharset(),StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
 		} catch(Throwable t) {
 			t.printStackTrace();
 			throw new RuntimeException("can not write file: "+file);
@@ -240,6 +237,13 @@ public class FileIO {
 		}
 		return reader;
 	}
+	public static Reader toReaderOrThrow(File file) throws IOException {
+		Reader reader=null;
+		if(file.exists()&&file.canRead()) {
+			reader=Files.newBufferedReader(file.toPath(),Charset.defaultCharset());
+		} else throw new RuntimeException("file not found or can not be read.");
+		return reader;
+	}
 	public static Reader toReader(String string) {
 		return string!=null?new StringReader(string):null;
 	}
@@ -253,16 +257,14 @@ public class FileIO {
 	public static Writer toWriter(File file) {
 		Writer writer=null;
 		try {
-			writer=Files.newBufferedWriter(file.toPath(),Charset.defaultCharset(),StandardOpenOption.CREATE,
-					StandardOpenOption.TRUNCATE_EXISTING);
+			writer=Files.newBufferedWriter(file.toPath(),Charset.defaultCharset(),StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
 		} catch(IOException e) {
 			System.out.println(file+" toWriter caught: "+e);
 		}
 		return writer;
 	}
 	public static Writer toWriterOrThrow(File file) throws IOException {
-		return Files.newBufferedWriter(file.toPath(),Charset.defaultCharset(),StandardOpenOption.CREATE,
-				StandardOpenOption.TRUNCATE_EXISTING);
+		return Files.newBufferedWriter(file.toPath(),Charset.defaultCharset(),StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
 	}
 	public static void close(final Reader r) {
 		try {

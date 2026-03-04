@@ -5,3 +5,5 @@ maybe: logOrPrint()
 Net and NetRabbit have stuff that os tablet specific. separate and move net rabbit back to the rabbit project.
 
 add nested loops
+
+pick a cannoical static initalization order and put it in here.
