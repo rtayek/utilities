@@ -2,7 +2,7 @@ package com.tayek.util.log;
 import java.io.*;
 import java.util.Date;
 import java.util.logging.*;
-public class CustomFormatter extends Formatter {
+public class ColoredFormatter extends Formatter {
     public static final String ANSI_RESET="\u001B[0m";
     public static final String ANSI_RED="\u001B[31m";
     public static final String ANSI_YELLOW="\u001B[33m";

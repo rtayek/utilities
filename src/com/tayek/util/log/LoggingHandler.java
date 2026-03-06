@@ -5,29 +5,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.logging.*;
-import java.util.logging.Formatter;
 import com.tayek.util.core.Pair;
 import com.tayek.util.net.Net;
 public class LoggingHandler {
-	public static class MyFormatter extends Formatter {
-		private MyFormatter() {}
-		@Override public String format(LogRecord record) {
-			String threadName=Thread.currentThread().getName();
-			String className=record.getSourceClassName();
-			int x=className.lastIndexOf(".");
-			className=className.substring(x+1);
-			long time=System.currentTimeMillis();
-			long dt=(time-t0);// %100_000;
-			if(threadName.length()>maxThreadNameLength)
-				threadName=threadName.substring(0,maxThreadNameLength-3)+'*'+threadName.substring(threadName.length()-1);
-			return String.format(format,dt,record.getSequenceNumber(),record.getLevel(),record.getMessage(),threadName,
-					className+"."+record.getSourceMethodName()+"()");
-		}
-		private static long t0=System.currentTimeMillis();
-		private static final Integer maxThreadNameLength=10;
-		private static final String format="%06d %05d %7s %-45s in %"+maxThreadNameLength+"s %s\n";
-		public static final MyFormatter instance=new MyFormatter();
-	}
 	public static class SocketHandlerCallable implements Runnable,java.util.concurrent.Callable<java.util.logging.SocketHandler> {
 		public SocketHandlerCallable(String host,int service) {
 			this.host=host;
@@ -55,7 +35,7 @@ public class LoggingHandler {
 	}
 	public static void addMyHandlerAndSetLevel(Logger logger,Level level) {
 		logger.setUseParentHandlers(false);
-		JulLogging.addConsoleHandler(logger,MyFormatter.instance,Level.ALL);
+		JulLogging.addConsoleHandler(logger,myFormatter,Level.ALL);
 		logger.setLevel(level);
 	}
 	public static void addFileHandler(Logger logger,File logFileDirectory,String prefix) {
@@ -237,4 +217,5 @@ public class LoggingHandler {
 		}
 	}
 	public static final Logger logger=Logger.getLogger(LoggingHandler.class.getName());
+	private static final MyFormatter myFormatter=new MyFormatter();
 }
