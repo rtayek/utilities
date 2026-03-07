@@ -79,7 +79,7 @@ public enum Sequence {
     public String coloredString(String string) {
         return reset.sequence+sequence+string+reset.sequence;
     }
-    static String color(Sequence sequence) { return sequence.coloredString(ColorLogs.quote(sequence.sequence)); }
+    static String color(Sequence sequence) { return sequence.coloredString(ConsoleAndLogColors.quote(sequence.sequence)); }
     public static void setNameToColorIndex(Map<String,Integer> nameToColorIndex) {
         map.clear();
         if(nameToColorIndex==null) return;
@@ -92,12 +92,12 @@ public enum Sequence {
         }
     }
     public static void main(String[] args) {
-        logger.info("foreground"+" "+ColorLogs.quote(blackOrWhite.sequence)+" "+color(blackOrWhite));
+        logger.info("foreground"+" "+ConsoleAndLogColors.quote(blackOrWhite.sequence)+" "+color(blackOrWhite));
         for(String key:map.keySet()) {
             Sequence sequence=map.get(key);
-            logger.info(key+":"+ColorLogs.quote(blackOrWhite.sequence)+' '+color(sequence));
+            logger.info(key+":"+ConsoleAndLogColors.quote(blackOrWhite.sequence)+' '+color(sequence));
         }
-        logger.info("foreground"+" "+ColorLogs.quote(blackOrWhite.sequence)+" "+color(blackOrWhite));
+        logger.info("foreground"+" "+ConsoleAndLogColors.quote(blackOrWhite.sequence)+" "+color(blackOrWhite));
     }
     final String sequence;
     public static Sequence blackOrWhite=white;

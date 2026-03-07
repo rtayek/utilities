@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 import com.tayek.util.core.Pair;
-public class ColorLogs {
+public class ConsoleAndLogColors {
     //https://stackoverflow.com/questions/54909752/how-to-change-the-util-logging-logger-printing-colour-in-logging-properties/60434521#60434521
     //https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println/5762502#5762502
     public static String coloredString(String string,String escapeSequence) {
@@ -66,14 +66,14 @@ public class ColorLogs {
         boolean foo=true;
         if(foo) {
             logger.info("color1:");
-            logger.info(ColorLogs.coloredString("a nothing xx",ColorLogs.blackOrWhite));
-            logger.info(ColorLogs.coloredString("a main xx",ColorLogs.blackOrWhite));
-            logger.info(ColorLogs.coloredString("a game xx",ColorLogs.color_RED));
-            logger.info(ColorLogs.coloredString("a recorder xx",ColorLogs.color_PURPLE));
-            logger.info(ColorLogs.coloredString("a black xx",ColorLogs.color_GREEN));
-            logger.info(ColorLogs.coloredString("a white xx",ColorLogs.color_CYAN));
-            logger.info(ColorLogs.coloredString("a server xx",ColorLogs.color_BLUE));
-            logger.info(ColorLogs.coloredString("a model xx",ColorLogs.color_YELLOW));
+            logger.info(ConsoleAndLogColors.coloredString("a nothing xx",ConsoleAndLogColors.blackOrWhite));
+            logger.info(ConsoleAndLogColors.coloredString("a main xx",ConsoleAndLogColors.blackOrWhite));
+            logger.info(ConsoleAndLogColors.coloredString("a game xx",ConsoleAndLogColors.color_RED));
+            logger.info(ConsoleAndLogColors.coloredString("a recorder xx",ConsoleAndLogColors.color_PURPLE));
+            logger.info(ConsoleAndLogColors.coloredString("a black xx",ConsoleAndLogColors.color_GREEN));
+            logger.info(ConsoleAndLogColors.coloredString("a white xx",ConsoleAndLogColors.color_CYAN));
+            logger.info(ConsoleAndLogColors.coloredString("a server xx",ConsoleAndLogColors.color_BLUE));
+            logger.info(ConsoleAndLogColors.coloredString("a model xx",ConsoleAndLogColors.color_YELLOW));
             logger.info("||||||||||");
             logger.info("color2");
             for(String string:strings) {
@@ -159,5 +159,5 @@ public class ColorLogs {
         makeMap();
     }
     static boolean lightTheme=true;
-    private static final Logger logger=Logger.getLogger(ColorLogs.class.getName());
+    private static final Logger logger=Logger.getLogger(ConsoleAndLogColors.class.getName());
 }

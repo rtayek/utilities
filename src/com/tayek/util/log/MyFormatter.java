@@ -24,7 +24,7 @@ public class MyFormatter extends Formatter {
         if(name.length() > maxThreadNameLength) name = name.substring(0, maxThreadNameLength - 3) + '~' + name.substring(name.length() - 1);
         String line = String.format(format, record.getSequenceNumber(), name, record.getLevel(), record.getMessage(),
                 record.getSourceClassName() + "." + record.getSourceMethodName() + "()");
-        String coloredLine = useSequence ? Sequence.color(line, name) : ColorLogs.color(line);
+        String coloredLine = useSequence ? Sequence.color(line, name) : ConsoleAndLogColors.color(line);
         return useColor ? coloredLine : line;
     }
 
