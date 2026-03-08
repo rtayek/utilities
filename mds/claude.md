@@ -1,0 +1,52 @@
+# CLAUDE.md
+
+Instructions for Claude when working in this project.
+
+## Project
+
+A collection of prototype `.md` files for use as starting templates in Java 25 software projects. Each file covers a different concern (coding style, design principles, agent behaviour, etc.) and is meant to be copied and customised per project.
+
+## Build
+
+```bash
+# No build step — this project is documentation only.
+```
+
+## Test
+
+```bash
+# Review each .md file for completeness and consistency.
+```
+
+## Run
+
+```bash
+# No run step — open the .md files directly in any markdown viewer or editor.
+```
+
+## Key files
+
+| File | Purpose |
+|------|---------|
+| `claude.md` | Instructions and context for Claude when working in this project |
+| `agents.md` | Rules governing what AI agents may do freely, must ask about, or must never do |
+| `coding-style.md` | Naming, formatting, and language-specific style rules (Java 25, C/C++, NASM) |
+| `design.md` | Core architectural principles, folder structure, error handling, and concurrency guidance |
+| `README.md` | Project overview and how to use these templates |
+| `contributing.md` | How to propose changes or additions to the templates |
+| `changelog.md` | Version history of the template collection |
+
+## Conventions
+
+- Follow `coding-style.md` for any code examples embedded in the templates.
+- Follow `design.md` for all architectural decisions.
+- Follow `agents.md` for rules on what requires approval.
+
+## Known issues
+
+_None yet_
+
+## Off-limits
+
+- `.env` and any secrets files
+- Generated files (regenerate them via the build command instead)

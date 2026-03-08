@@ -86,7 +86,7 @@ enum MoveType { pass, placement, resignation }
 
 ## 3.4 Constants (`static final`)
 
-MUST use **camelCase** (not ALL_CAPS).
+MUST use **lowercamelCase** (not ALL_CAPS).
 
 Example:
 

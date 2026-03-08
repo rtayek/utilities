@@ -1,6 +1,7 @@
 
 ### Coding Standards
 
+* Take full advantage of JAaav 25 features.
 * Java records for immutable data
 * Default/package-private visibility for everything unless there is a clear reason otherwise
 * Enums, fields, and methods all  use **lowerCamelCase** values
