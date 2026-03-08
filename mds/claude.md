@@ -4,7 +4,7 @@ Instructions for Claude when working in this project.
 
 ## Project
 
-A collection of prototype `.md` files for use as starting templates in Java 25 software projects. Each file covers a different concern (coding style, design principles, agent behaviour, etc.) and is meant to be copied and customised per project.
+A collection of prototype `.md` files for use as starting templates in software projects. Each file covers a different concern (coding style, design principles, agent behaviour, etc.) and is meant to be copied and customized per project.
 
 ## Build
 
@@ -33,18 +33,12 @@ A collection of prototype `.md` files for use as starting templates in Java 25 s
 | `coding-style.md` | Naming, formatting, and language-specific style rules (Java 25, C/C++, NASM) |
 | `design.md` | Core architectural principles, folder structure, error handling, and concurrency guidance |
 | `README.md` | Project overview and how to use these templates |
-| `contributing.md` | How to propose changes or additions to the templates |
-| `changelog.md` | Version history of the template collection |
 
 ## Conventions
 
 - Follow `coding-style.md` for any code examples embedded in the templates.
 - Follow `design.md` for all architectural decisions.
 - Follow `agents.md` for rules on what requires approval.
-
-## Known issues
-
-_None yet_
 
 ## Off-limits
 

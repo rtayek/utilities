@@ -4,7 +4,7 @@ Guidelines for AI agents working in any codebase.
 
 ## Behaviour
 
-- Read all of the .md files in the folder and it's subfolders.
+- Read all of the .md files in this folder and it's sub-folders.
 - Ask before refactoring — understand intent first.
 - Make one logical change per turn; keep diffs small and reviewable.
 - Never delete code without explaining why.
