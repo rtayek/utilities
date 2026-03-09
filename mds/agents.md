@@ -6,9 +6,13 @@ Guidelines for AI agents working in any codebase.
 
 This document is normative. Where it uses **MUST / MUST NOT / SHOULD / MAY**, those words are used in the RFC sense.
 
+If instructions in this file conflict with another file, this file takes precedence for agent behavior rules.
+
 ## Behavior
 
-- Read all of the .md files in this folder and its sub-folders.
+- Read all of the .md files in this folder and its sub-folders before doing anything.
+- Follow `coding-style.md` for all code written or suggested.
+- Follow `persona.md` for communication style.
 - Ask before refactoring — understand intent first.
 - Make one logical change per turn; keep diffs small and reviewable.
 - Never delete code without explaining why.
@@ -16,7 +20,7 @@ This document is normative. Where it uses **MUST / MUST NOT / SHOULD / MAY**, th
 
 ## What agents may do freely
 
-- Anything except deleting the git repository.
+- Anything not listed in the sections below, except deleting the git repository.
 
 ## What agents must ask before doing
 
@@ -24,7 +28,7 @@ This document is normative. Where it uses **MUST / MUST NOT / SHOULD / MAY**, th
 - Renaming or moving files.
 - Adding new dependencies.
 - Making architectural changes.
-- Widen the access modifier of internal methods or classes.
+- Widening the access modifier of internal methods or classes.
 
 ## What agents must never do
 
