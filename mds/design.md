@@ -1,6 +1,14 @@
 # Design
 
-Core design principles for this project.
+## Goals
+
+Optimize for:
+
+- **Correctness** — verified by tests
+- **Readability** — code reads like prose
+- **Determinism** — tests and builds behave the same everywhere
+- **Low coupling** and **clear boundaries**
+- **Long-term maintainability** over short-term cleverness
 
 ## Principles
 

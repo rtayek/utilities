@@ -7,9 +7,19 @@ Applies to all languages unless a language-specific section says otherwise.
 - Clarity over cleverness — code is read far more than it is written.
 - Small functions with a single responsibility.
 - Meaningful names; no single-letter variables outside loop counters.
-- Comments explain *why*, not *what* the code does. If code conflicts with a comment, fix the code.
-Comment out dead code; Do not delete it.
-- Comments must be minimal — only add one if it provides information not already present in the code (non-obvious invariants, tricky algorithm reasoning, format/protocol explanations, references to external specs).
+- Comment out dead code; do not delete it.
+
+## Comments
+
+- Comments must be minimal — code is the documentation.
+- Comments explain *why*, not *what* the code does.
+- A comment is allowed only if it adds information NOT already present in the code:
+  - non-obvious invariants
+  - tricky algorithm reasoning
+  - format/protocol explanations
+  - references to external specs
+- “Explaining what the code is doing” is not permitted.
+- If code conflicts with a comment, fix the code.
 
 ## Naming
 
@@ -29,7 +39,7 @@ Names should reflect intent: `mapper`, `applier`, `codec`, `adapter`, `plugin`, 
 - Max line length: 100 characters.
 - Opening brace on the same line as the declaration.
 - Compress vertical white space as much as possible.
-- Compress horizonyal  white space as much as is reasonable.
+- Compress horizontal white space as much as is reasonable.
 - Fit code onto one line if it is reasonable.
 
 ## Class layout
@@ -78,18 +88,33 @@ Fields at the top are not allowed. The file should read top-down like an executi
 
 ## Tests
 
-- Use  xUnit Test Patterns: liberaly.
+- Use xUnit Test Patterns liberally.
+- Tests are the functional spec — behavioral documentation lives in tests, not prose comments.
+- If behavior changes, tests MUST change.
+- Test class names must end with: `TestCase`.
 - Test names describe the scenario: `placeStone_reducesEnemyLiberties`.
-- Test names must end with: `TestCase`.
 - One assertion concept per test.
 - Tests must be deterministic — no random data without a fixed seed, no wall-clock time, no network, no environment-specific paths, no reliance on test order.
 - Cover the happy path, boundary conditions, and expected error cases.
-- Tests are the functional spec — behavioral documentation lives in tests, not prose comments.
 - If tests write files, write into an isolated temp directory and clean up afterward.
+
+## Build
+
+- The build tool is the source of truth for build configuration.
+- IDE configuration MUST be derived from the build tool, not hand-maintained.
+- The project MUST build and test from the command line in a clean environment.
+
+## Spec violations
+
+If you violate this spec, you MUST do one of:
+
+- Fix the code to comply, or
+- Add a short "Exception" note near the code explaining why compliance is worse, and ideally add a test that proves the exception is justified.
+
+Recurring exceptions indicate the spec needs updating.
 
 ## Utilities
 
-- Reusable utilities live under `tayek.util.*`.
 - Utilities must be dependency-light and general-purpose.
 - Project-specific logic must NOT be placed in util packages.
 - If a utility depends on model/parser/UI types, it is not a utility.
