@@ -22,7 +22,7 @@ If code conflicts with this spec, either:
 
 ### Default: no comments
 
-The code is the documentation. Comments MUST be minimal. 
+The code is the documentation. Comments MUST be minimal.
 
 A comment is allowed only if it adds information NOT already present in code, such as:
 

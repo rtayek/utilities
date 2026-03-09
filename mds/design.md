@@ -41,19 +41,18 @@ resources/
 
 The project SHOULD prefer:
 
-* small, well-scoped libraries
+- small, well-scoped libraries
 
 The project SHOULD avoid:
 
-* heavy frameworks
-* deep transitive dependency graphs
-* libraries that force architectural coupling
+- heavy frameworks
+- deep transitive dependency graphs
+- libraries that force architectural coupling
 
 If a dependency is added, it MUST be justified by:
 
-* a clear need, and
-* a net reduction in code complexity.
-
+- a clear need, and
+- a net reduction in code complexity.
 
 ## Error handling
 

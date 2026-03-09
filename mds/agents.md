@@ -2,7 +2,7 @@
 
 Guidelines for AI agents working in any codebase.
 
-## Behaviour
+## Behavior
 
 - Read all of the .md files in this folder and its sub-folders.
 - Ask before refactoring — understand intent first.
