@@ -2,6 +2,10 @@
 
 Guidelines for AI agents working in any codebase.
 
+## Status
+
+This document is normative. Where it uses **MUST / MUST NOT / SHOULD / MAY**, those words are used in the RFC sense.
+
 ## Behavior
 
 - Read all of the .md files in this folder and its sub-folders.

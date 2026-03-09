@@ -8,6 +8,7 @@ This document is normative. Where it uses **MUST / MUST NOT / SHOULD / MAY**, th
 
 If code conflicts with this spec, either:
 
+<!-- below is not quite right -->
 - fix the code, or
 - update this spec and *then* fix the code.
 
@@ -50,7 +51,6 @@ Names should reflect intent: `test...`, `mapper`, `applier`, `codec`, `adapter`,
 
 ## Formatting
 
-- Indent with 4 spaces (no tabs).
 - Max line length: 100 characters.
 - Opening brace on the same line as the declaration.
 - Compress vertical white space as much as possible.
