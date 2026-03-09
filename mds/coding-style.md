@@ -6,20 +6,24 @@ Applies to all languages unless a language-specific section says otherwise.
 
 - Clarity over cleverness — code is read far more than it is written.
 - Small functions with a single responsibility.
-- Meaningful names; no single-letter variables outside loop counters.
+- Meaningful names; no single-letter variables outside loop counters unless they are in common use in mathematics, computer science, physics or engineering.
 - Comment out dead code; do not delete it.
 
-## Comments
+## Comments Policy
 
-- Comments must be minimal — code is the documentation.
-- Comments explain *why*, not *what* the code does.
-- A comment is allowed only if it adds information NOT already present in the code:
-  - non-obvious invariants
-  - tricky algorithm reasoning
-  - format/protocol explanations
-  - references to external specs
-- “Explaining what the code is doing” is not permitted.
-- If code conflicts with a comment, fix the code.
+### Default: no comments
+
+Comments MUST be minimal. Code is the documentation.
+
+A comment is allowed only if it adds information NOT already present in code, such as:
+
+- non-obvious invariants
+- tricky algorithm reasoning
+- format/protocol explanations
+- references to external specs
+
+"Explaining what the code is doing" is not permitted.
+If a comment conflicts with the code, fix the comment.
 
 ## Naming
 
@@ -30,8 +34,10 @@ Applies to all languages unless a language-specific section says otherwise.
 | Enum values | `camelCase` (not `ALL_CAPS`) |
 | Constants (`static final`) | `camelCase` (not `ALL_CAPS`) |
 | Files | match the primary class/type they contain |
+| Test classes | name must end with `TestCase` |
+| Test methods | describe the scenario and should start with test: `testPlaceStone_reducesEnemyLiberties` |
 
-Names should reflect intent: `mapper`, `applier`, `codec`, `adapter`, `plugin`, `renderer`.
+Names should reflect intent: `test...`, `mapper`, `applier`, `codec`, `adapter`, `plugin`, `renderer`.
 
 ## Formatting
 
@@ -88,11 +94,12 @@ Fields at the top are not allowed. The file should read top-down like an executi
 
 ## Tests
 
+### Tests as Specification
+
+Tests are the functional spec — behavioral documentation MUST live in tests, not in prose comments.
+
 - Use xUnit Test Patterns liberally.
-- Tests are the functional spec — behavioral documentation lives in tests, not prose comments.
 - If behavior changes, tests MUST change.
-- Test class names must end with: `TestCase`.
-- Test names describe the scenario: `placeStone_reducesEnemyLiberties`.
 - One assertion concept per test.
 - Tests must be deterministic — no random data without a fixed seed, no wall-clock time, no network, no environment-specific paths, no reliance on test order.
 - Cover the happy path, boundary conditions, and expected error cases.

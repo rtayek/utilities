@@ -88,7 +88,7 @@ Reference: *Design Patterns* (Gang of Four).
 | Adapter | bridge an incompatible interface to an expected one |
 | Bridge | separate abstraction from implementation so both can vary |
 | Composite | treat individual objects and compositions uniformly (tree structures) |
-| Decorator | add behaviour to an object without subclassing |
+| Decorator | add behavior to an object without subclassing |
 | Facade | provide a simplified interface to a complex subsystem |
 | Flyweight | share fine-grained objects to reduce memory when many instances are identical |
 | Proxy | control access to an object (lazy init, security, caching, remote) |
@@ -100,10 +100,10 @@ Reference: *Design Patterns* (Gang of Four).
 | Command | encapsulate a request as an object; supports undo, queuing, logging |
 | Interpreter | define a grammar and interpret sentences in a language |
 | Iterator | sequential access to elements without exposing the underlying structure |
-| Mediator | centralise communication between objects to reduce coupling |
+| Mediator | centralize communication between objects to reduce coupling |
 | Memento | capture and restore object state without violating encapsulation |
 | Observer | notify dependents when an object changes state |
-| State | change object behaviour when its internal state changes |
+| State | change object behavior when its internal state changes |
 | Strategy | define a family of algorithms; make them interchangeable |
 | Template Method | define the skeleton of an algorithm; let subclasses fill in steps |
 | Visitor | add operations to an object structure without modifying it |

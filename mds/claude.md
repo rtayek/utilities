@@ -4,7 +4,7 @@ Instructions for Claude when working in this project.
 
 ## Project
 
-A collection of prototype `.md` files for use as starting templates in software projects. Each file covers a different concern (coding style, design principles, agent behaviour, etc.) and is meant to be copied and customized per project.
+This is a utilities project that has a collection of prototype `.md` files in mds/  for use as starting templates in software projects. Each file covers a different concern (coding style, design principles, agent behaviour, etc.) and is meant to be copied and customized per project.
 
 ## Build
 
