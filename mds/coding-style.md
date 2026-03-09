@@ -2,6 +2,15 @@
 
 Applies to all languages unless a language-specific section says otherwise.
 
+## Status
+
+This document is normative. Where it uses **MUST / MUST NOT / SHOULD / MAY**, those words are used in the RFC sense.
+
+If code conflicts with this spec, either:
+
+- fix the code, or
+- update this spec and *then* fix the code.
+
 ## General
 
 - Clarity over cleverness — code is read far more than it is written.
@@ -13,7 +22,7 @@ Applies to all languages unless a language-specific section says otherwise.
 
 ### Default: no comments
 
-Comments MUST be minimal. Code is the documentation.
+The code is the documentation. Comments MUST be minimal. 
 
 A comment is allowed only if it adds information NOT already present in code, such as:
 

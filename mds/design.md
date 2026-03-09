@@ -1,5 +1,14 @@
 # Design
 
+## Status
+
+This document is normative. Where it uses **MUST / MUST NOT / SHOULD / MAY**, those words are used in the RFC sense.
+
+If code conflicts with this spec, either:
+
+- fix the code, or
+- update this spec and *then* fix the code.
+
 ## Goals
 
 Optimize for:
@@ -30,8 +39,21 @@ resources/
 
 ## Dependencies
 
-- Prefer the standard library; add third-party libraries only when the benefit is clear.
-- Prefer small, well-scoped libraries; avoid heavy frameworks and deep transitive dependency graphs.
+The project SHOULD prefer:
+
+* small, well-scoped libraries
+
+The project SHOULD avoid:
+
+* heavy frameworks
+* deep transitive dependency graphs
+* libraries that force architectural coupling
+
+If a dependency is added, it MUST be justified by:
+
+* a clear need, and
+* a net reduction in code complexity.
+
 
 ## Error handling
 
