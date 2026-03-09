@@ -89,6 +89,47 @@ If a dependency is added, it MUST be justified by:
 - **DRY** (Don't Repeat Yourself) — every piece of knowledge has a single authoritative representation.
 - **YAGNI** (You Aren't Gonna Need It) — don't build what isn't needed yet.
 - **Law of Demeter** — talk only to immediate collaborators; avoid method-chaining across layers.
+- **Tell Don't Ask** — tell objects what to do rather than querying their state and deciding for them.
+- **CQS** (Command Query Separation) — a method either changes state or returns a value, never both.
+- **Composition over inheritance** — prefer assembling behavior from small collaborators over deep class hierarchies.
+- **Boy Scout Rule** — leave the code cleaner than you found it.
+
+## Functional Programming Principles
+
+- **Pure functions** — given the same inputs, always return the same output with no side effects.
+- **Immutability** — prefer values that cannot change; transform rather than mutate.
+- **Function composition** — build complex behavior by combining small, focused functions.
+- **Referential transparency** — an expression can be replaced with its value without changing program behavior.
+- **Avoid side effects** — isolate I/O and mutation at the edges; keep the core logic pure.
+- **Higher-order functions** — functions that take or return other functions enable reuse without inheritance.
+
+## Domain-Driven Design (DDD)
+
+Reference: *Domain-Driven Design* (Evans).
+
+- **Ubiquitous Language** — use the same terms in code, tests, and conversation as the domain experts use.
+- **Bounded Context** — a explicit boundary within which a model applies; different contexts may use different models for the same concept.
+- **Entity** — an object defined by identity that persists over time (e.g. a `User` with an ID).
+- **Value Object** — an object defined by its attributes, not identity; always immutable (e.g. a `Money` or `Address`).
+- **Aggregate** — a cluster of objects treated as a unit for consistency; accessed only through the Aggregate Root.
+- **Domain Event** — something that happened in the domain that other parts of the system may care about.
+- **Repository** — abstracts persistence; the domain works with in-memory collections, not SQL.
+- **Anti-Corruption Layer** — translates between your model and an external system's model to prevent leakage.
+
+## Security Principles
+
+- **Least privilege** — grant only the permissions needed to do the job, nothing more.
+- **Defense in depth** — layer multiple independent controls; do not rely on a single safeguard.
+- **Fail securely** — on error, default to the safe/closed state, not open.
+- **Validate all input** — treat all data from outside the system boundary as untrusted.
+- **Don't invent cryptography** — use well-audited libraries; never roll your own crypto.
+
+## Performance
+
+- **Measure before optimizing** — profile first; never guess where the bottleneck is.
+- **Premature optimization is the root of all evil** (Knuth) — write clear code first, optimize only when necessary.
+- **Amdahl's Law** — the speedup from parallelizing a task is limited by its sequential fraction.
+- **Cache thoughtfully** — caching adds correctness risk; only cache when profiling justifies it.
 
 ## Object-Oriented Design Patterns
 
