@@ -1,6 +1,5 @@
 package com.tayek.util.misc;
 import static org.junit.Assert.*;
-import java.util.Date;
 import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.util.junit.BasicTestWatcher;

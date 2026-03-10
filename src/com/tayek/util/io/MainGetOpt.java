@@ -23,7 +23,7 @@ public class MainGetOpt {
         final String options="-:n:r:dhvw;";
         Getopt getopt=new Getopt("testprog",argv,options,longopts);
         getopt.setOpterr(false);
-        if(false) { GetOptSupport.logLongOpts(options,longopts); }
+        //if(false) { GetOptSupport.logLongOpts(options,longopts); }
         while((c=getopt.getopt())!=-1) {
             if(GetOptSupport.handleCommonOption(c,getopt,longopts,sb,MainGetOpt::help)) continue;
             switch(c) {

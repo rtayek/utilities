@@ -1,7 +1,6 @@
 package com.tayek.util.io;
 import java.io.*;
 import java.net.*;
-import java.util.*;
 import java.util.logging.Logger;
 import com.tayek.util.core.Pair;
 public class End {
@@ -75,7 +74,6 @@ public class End {
             End front=null,back=null;
             try(ServerSocket serverSocket=new ServerSocket(port);) {
                 Socket frontEnd=new Socket();
-                if(frontEnd==null) throw new RuntimeException("socket is null!");
                 boolean ok=connect("localhost",serverSocket.getLocalPort(),100,frontEnd);
                 if(!ok) throw new RuntimeException("can not connect!");
                 Socket backEnd=serverSocket.accept();

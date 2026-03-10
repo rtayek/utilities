@@ -1,11 +1,8 @@
 package com.tayek.util.misc;
-import static org.junit.Assert.*;
 import org.junit.*;
-import org.junit.Test;
 import org.junit.rules.TestRule;
 import com.tayek.util.core.Histogram;
 import com.tayek.util.junit.BasicTestWatcher;
-import org.junit.Test;
 /*
 public class HistogramTestCase {
         @Before public void setUp() throws Exception {}

@@ -1,10 +1,8 @@
 package com.tayek.util.core;
-import static org.junit.Assert.*;
 import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.util.junit.BasicTestWatcher;
 import static com.tayek.util.io.Print.*;
-import com.tayek.util.core.Stacks;
 public class UtilitiesTestCase {
     @Rule public TestRule watcher=new BasicTestWatcher(getClass());
 

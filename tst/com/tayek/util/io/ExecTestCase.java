@@ -3,8 +3,6 @@ import static org.junit.Assert.*;
 import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.util.junit.BasicTestWatcher;
-import com.tayek.util.core.Android;
-import com.tayek.util.net.Net;
 import com.tayek.util.exec.Exec;
 public class ExecTestCase {
     @Rule public TestRule watcher=new BasicTestWatcher();
