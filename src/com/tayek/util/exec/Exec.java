@@ -9,8 +9,8 @@ import java.util.*;
 import java.util.logging.Logger;
 import com.tayek.util.core.Android;
 public class Exec {
-    public Exec(String command) {
-        processBuilder=new ProcessBuilder(command);
+    public Exec(String command) { // split on whitespace like exec(String) does.
+        processBuilder=new ProcessBuilder(splitCommand(command));
     }
     public Exec(String[] strings) {
         List<String> command=Arrays.asList(strings);
@@ -34,11 +34,19 @@ public class Exec {
         Process process;
         try {
             process=processBuilder.start();
-            //p("started process.");
-            rc=process.waitFor();
-            //p("process returned: "+rc);
+            // drain stderr on its own thread and stdout here, *then* wait.
+            // waiting first can hang forever once the process fills a pipe buffer.
+            final Process started=process;
+            java.util.concurrent.CompletableFuture<String> errorFuture=java.util.concurrent.CompletableFuture.supplyAsync(()-> {
+                try {
+                    return output(started.getErrorStream());
+                } catch(IOException e) {
+                    throw new java.io.UncheckedIOException(e);
+                }
+            });
             output=output(process.getInputStream());
-            error=output(process.getErrorStream());
+            error=errorFuture.join();
+            rc=process.waitFor();
         } catch(IOException e) {
             l.warning("caught: "+e);
             e.printStackTrace();

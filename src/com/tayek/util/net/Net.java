@@ -123,16 +123,16 @@ public class Net {
     }
     public static boolean canConnect(String host,int service,int timeout) {
         boolean canConnect=false;
-        InetSocketAddress inetSocketAddress=new InetSocketAddress(host,80);
+        InetSocketAddress inetSocketAddress=new InetSocketAddress(host,service);
         Socket socket=silentConnect(inetSocketAddress,timeout);
         if(socket!=null) {
-            p("connected to router: "+host);
+            p("connected to: "+host+":"+service);
             canConnect=true;
             try {
                 socket.close();
             } catch(IOException e) {}
         } else {
-            p("can not connect to router: "+host);
+            p("can not connect to: "+host+":"+service);
             canConnect=false;
         }
         return canConnect;

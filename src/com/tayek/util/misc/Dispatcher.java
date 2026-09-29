@@ -41,19 +41,19 @@ public class Dispatcher {
                 System.out.println("enter a number and any argumemts.");
                 string=in.readLine();
                 System.out.println("string is: '"+string+"'");
-                if(string.equals(null)) break loop;
+                if(string==null) break loop; // end of input
                 if(!string.isEmpty()) {
                     parts=string.split(" ");
                     number=toInteger(parts[0]);
                     if(number!=null) ok=true;
-                } else System.out.println(parts[0]+" is not a valid choice");
+                } else System.out.println("empty line is not a valid choice");
             }
             /*final Pair<String,Class<?>> pair=*/run(number,string,parts);
         }
     }
     CPair<String,Class<?>> run(Integer number,String string,String[] parts) {
         final CPair<String,Class<?>> pair=entryPoints.get(number);
-        if(pair.equals(null)) {
+        if(pair==null) {
             System.out.println(string+" is not a valid choice");
         } else {
             final Class<?> entryPoint=pair.second;

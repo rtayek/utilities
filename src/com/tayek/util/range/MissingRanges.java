@@ -19,7 +19,7 @@ public class MissingRanges<T extends Comparable<T>>extends MissingABC<T,Range<T>
                 } else logger.warning("duplicate out of oreder - may be missed if not in recent!");
             } else {
                 logger.warning("error: smaller is not in missing: "+n);
-                if(outOfOrder.contains(n)) {
+                if(outOfOrderContains(n)) {
                     logger.warning("but it is in out of order: "+n);
                     logger.warning("so it is a duplicate that may be missed if not in recent!t"+n);
                 } else {
@@ -32,7 +32,8 @@ public class MissingRanges<T extends Comparable<T>>extends MissingABC<T,Range<T>
             }
         } else if(n.equals(largest)) logger.fine("duplicat largest: "+n);
         else {
-            for(T t:range(range.sequence(largest).next().value(),n))
+            T nMinus1=range.sequence(n).previous().value(); // n itself is not missing
+            for(T t:range(range.sequence(largest).next().value(),nMinus1))
                 if(!missing.add(t)) {
                     logger.severe("error: set already contains: "+t);
                     throw new MissingException("error: set already contains: "+t);
@@ -44,12 +45,16 @@ public class MissingRanges<T extends Comparable<T>>extends MissingABC<T,Range<T>
         return largest+"-"+missing+", ooo: "+outOfOrder;
     }
     public static void main(String[] args) throws IOException {
-        Missing<Integer,Integer> m=Missing.factory.createNormal(0);
+        Missing<Integer,Range<Integer>> m=Missing.factory.createRanges(0);
         System.out.println(m);
         for(int i=0;i<10;i++) {
             m.adjust(i);
             System.out.println(m);
         }
+    }
+    private boolean outOfOrderContains(T n) {
+        for(Range<T> r:outOfOrder) if(r.contains(n)) return true;
+        return false;
     }
     public synchronized Set<T> missing() {
         return missing;

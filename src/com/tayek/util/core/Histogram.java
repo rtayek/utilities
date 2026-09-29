@@ -84,8 +84,8 @@ public class Histogram {
 	private void clearInternal() {
 		n=underflows=overflows=nans=0;
 		sum=sum2=0;
-		min=Double.MAX_VALUE;
-		max=Double.MIN_VALUE;
+		min=Double.POSITIVE_INFINITY;
+		max=Double.NEGATIVE_INFINITY;
 		for(int i=0;i<bins;i++)
 			bin[i]=0;
 		recent.clear();
@@ -171,7 +171,7 @@ public class Histogram {
 	private int[] bin;
 	private int n,bins,underflows,overflows,nans;
 	private final double low,high,range;
-	private double min=Double.MAX_VALUE,max=Double.MIN_VALUE,sum,sum2;
+	private double min=Double.POSITIVE_INFINITY,max=Double.NEGATIVE_INFINITY,sum,sum2;
 	private LruMap<Integer,Double> recent=new LruMap<>(101);
 	// probably have to add median back in here, but do it so both flavors are
 	// the same size, since we use arrays of these

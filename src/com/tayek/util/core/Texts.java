@@ -91,8 +91,8 @@ public class Texts {
 		StringBuilder sb=new StringBuilder();
 		for(int i=0;i<string.length();i++) {
 			char c=string.charAt(i);
-			if(c!='\\') sb.append(c);
-			else switch(string.charAt(i++)) {
+			if(c!='\\'||i+1>=string.length()) sb.append(c);
+			else switch(c=string.charAt(++i)) {
 				case 'r':
 					sb.append('\r');
 					break;
@@ -144,7 +144,7 @@ public class Texts {
 			ps.println("ex: "+expected.endsWith("\r\n")+", ac: "+actual.endsWith("\r\n"));
 			ps.println(expected.equals(actual));
 			byte[] bytes=actual.getBytes();
-			byte[] bytes2=actual.getBytes();
+			byte[] bytes2=expected.getBytes();
 			if(expected.length()!=actual.length()) {
 				ps.println("ex: "+expected.length()+", ac: "+actual.length());
 			}
