@@ -1,4 +1,4 @@
-package com.tayek.util.misc;
+package com.tayek.util.range;
 import static com.tayek.util.io.Print.*;
 import static org.junit.Assert.*;
 import java.util.ArrayList;

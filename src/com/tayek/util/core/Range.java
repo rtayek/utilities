@@ -10,7 +10,7 @@ public class Range<T extends Comparable<T>> {
     }
     public static <T extends Number & Comparable<T>> int compare(T a,T b) { return a.compareTo(b); }
     public Range(T min,T max) { this.min=min; this.max=max; }
-    boolean contains(T t) {
+    public boolean contains(T t) {
         if(min instanceof Number) {
             int rc1=numberComparator.compare((Number)min,(Number)t);
             int rc2=numberComparator.compare((Number)t,(Number)max);

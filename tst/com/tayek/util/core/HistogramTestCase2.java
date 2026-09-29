@@ -1,4 +1,4 @@
-package com.tayek.util.misc;
+package com.tayek.util.core;
 import org.junit.*;
 import org.junit.rules.TestRule;
 import com.tayek.util.core.Histogram;

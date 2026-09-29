@@ -18,10 +18,6 @@ public class LruMap<K,V> extends LinkedHashMap<K,V> {
         if(!accessOrder) throw new RuntimeException("you did not construct an lru map!");
         this.max=max;
     }
-    public LruMap(Map<? extends K,? extends V> map) {
-        super(map);
-        throw new RuntimeException("you did not construct an lru map!");
-    }
     @Override protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
         return size()>max;
     }

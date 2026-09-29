@@ -1,6 +1,5 @@
 package com.tayek.util.range;
 import java.lang.reflect.Constructor;
-import java.text.*;
 import java.util.*;
 import static com.tayek.util.io.Print.*;
 public class Range<T extends Comparable<T>> implements Comparable<Range<T>>,Iterable<T> {
@@ -123,13 +122,6 @@ public class Range<T extends Comparable<T>> implements Comparable<Range<T>>,Iter
     }
     public static <S extends Comparable<S>> Range<S> range(S from,S to) {
         return new Range<S>(from,to);
-    }
-    public static java.util.Date date(String date) {
-        try {
-            return DateFormat.getDateInstance().parse(date);
-        } catch(ParseException e) {
-            throw new RuntimeException(e);
-        }
     }
     public static <T extends Comparable<T>> void reduce(Set<Range<T>> set) { // assume disjoint
         synchronized(set) {

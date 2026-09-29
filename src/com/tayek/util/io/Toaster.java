@@ -2,24 +2,24 @@ package com.tayek.util.io;
 import static com.tayek.util.io.Print.*;
 import java.util.logging.Logger;
 import com.tayek.util.core.Android;
-import com.tayek.util.core.Callback;
+import java.util.function.Consumer;
 public interface Toaster {
     void toast(String string);
     Toaster toaster=Factory_.Implementation.instance().create();
     static class Android_ implements Toaster {
         Android_() {}
         @Override public void toast(String string) {
-            if(callback!=null) callback.call(string);
+            if(callback!=null) callback.accept(string);
             else {
                 logger.warning("callback is not set: "+string);
                 p("set callback!");
             }
             p(string);
         }
-        public void setCallback(Callback<String> callback) {
+        public void setCallback(Consumer<String> callback) {
             this.callback=callback;
         }
-        public Callback<String> callback;
+        public Consumer<String> callback;
     }
 	public static final Logger logger=Logger.getLogger(Toaster.class.getName());
 }

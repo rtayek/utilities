@@ -1,15 +1,5 @@
 package com.tayek.util.io;
-import java.io.BufferedReader;
-import java.io.Writer;
 public class Duplex {
-    public static class End {
-        public End(BufferedReader in,Writer out) { this.in=in; this.out=out; }
-        public BufferedReader in() { return in; }
-        public Writer out() { return out; }
-        @Override public String toString() { return "End [in="+in+", out="+out+"]"; }
-        public final BufferedReader in;
-        public final Writer out;
-    }
     public Duplex() {
         Pipe p1=new Pipe();
         Pipe p2=new Pipe();

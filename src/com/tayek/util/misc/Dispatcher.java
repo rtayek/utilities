@@ -1,5 +1,4 @@
 package com.tayek.util.misc;
-import com.tayek.util.core.CPair;
 import static com.tayek.util.concurrent.Threads.printThreads;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +17,7 @@ public class Dispatcher {
         add(Main.class);
     }
     public void add(Class<?> clazz) {
-        entryPoints.put(Integer.valueOf(entryPoints.size()+1),new CPair<String,Class<?>>(clazz.getName(),clazz));
+        entryPoints.put(entryPoints.size()+1,clazz);
     }
     public void remove(int i) {
         entryPoints.remove(i);
@@ -26,7 +25,7 @@ public class Dispatcher {
     void menu() {
         System.out.println("menu:");
         for(int x:entryPoints.keySet())
-            System.out.println(x+" "+entryPoints.get(x).second.getSimpleName()+" ("+entryPoints.get(x).first+")");
+            System.out.println(x+" "+entryPoints.get(x).getSimpleName()+" ("+entryPoints.get(x).getName()+")");
     }
     public void run(int i) throws IllegalAccessException,IllegalArgumentException,InvocationTargetException,NoSuchMethodException,SecurityException,IOException {}
     public void run() throws IllegalAccessException,IllegalArgumentException,InvocationTargetException,NoSuchMethodException,SecurityException,IOException {
@@ -48,39 +47,36 @@ public class Dispatcher {
                     if(number!=null) ok=true;
                 } else System.out.println("empty line is not a valid choice");
             }
-            /*final Pair<String,Class<?>> pair=*/run(number,string,parts);
+            run(number,string,parts);
         }
     }
-    CPair<String,Class<?>> run(Integer number,String string,String[] parts) {
-        final CPair<String,Class<?>> pair=entryPoints.get(number);
-        if(pair==null) {
+    Class<?> run(Integer number,String string,String[] parts) {
+        final Class<?> entryPoint=entryPoints.get(number);
+        if(entryPoint==null) {
             System.out.println(string+" is not a valid choice");
         } else {
-            final Class<?> entryPoint=pair.second;
-            if(entryPoint!=null) {
-                final String[] theRest=parts.length>1?Arrays.copyOfRange(parts,1,parts.length):new String[0];
-                System.out.println("the rest: "+Arrays.asList(theRest));
-                new Thread(new Runnable() {
-                    @Override public void run() {
-                        System.out.println("running: "+entryPoint+" with: "+Arrays.asList(theRest));
-                        try {
-                            entryPoint.getMethod("main",String[].class).invoke(null,(Object)theRest);
-                        } catch(IllegalAccessException|IllegalArgumentException|InvocationTargetException|NoSuchMethodException|SecurityException e) {
-                            e.printStackTrace();
-                            throw new RuntimeException(e);
-                        }
-                        printThreads();
+            final String[] theRest=parts.length>1?Arrays.copyOfRange(parts,1,parts.length):new String[0];
+            System.out.println("the rest: "+Arrays.asList(theRest));
+            new Thread(new Runnable() {
+                @Override public void run() {
+                    System.out.println("running: "+entryPoint+" with: "+Arrays.asList(theRest));
+                    try {
+                        entryPoint.getMethod("main",String[].class).invoke(null,(Object)theRest);
+                    } catch(IllegalAccessException|IllegalArgumentException|InvocationTargetException|NoSuchMethodException|SecurityException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
                     }
-                },pair.second.toString()).start();
-            } else throw new RuntimeException("entry point does not exist!");
+                    printThreads();
+                }
+            },entryPoint.toString()).start();
         }
-        return pair;
+        return entryPoint;
     }
     public static void main(final String[] arguments) throws Exception {
         new Dispatcher(arguments).run();
     }
     public final String[] arguments; // given to main
-    public final Map<Integer,CPair<String,Class<?>>> entryPoints=new TreeMap<>();
+    public final Map<Integer,Class<?>> entryPoints=new TreeMap<>();
     private static Integer toInteger(String argument) {
         try {
             return Integer.valueOf(argument);

@@ -9,6 +9,14 @@ public class Threads {
         Thread.enumerate(threads);
         return threads;
     }
+    /** Prints the live threads once a second until no more than n are active (was log.Joiner). */
+    public static void waitUntilAtMost(int n) throws InterruptedException {
+        while(Thread.activeCount()>n) {
+            System.out.println("threads:");
+            printThreads();
+            Thread.sleep(1_000);
+        }
+    }
     public static void printThreads() {
         Thread[] threads=getThreads();
         for(Thread thread:threads)

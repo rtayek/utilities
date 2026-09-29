@@ -89,9 +89,7 @@ public class End {
         }
         public static synchronized Holder duplex() { // two way pipe
             Duplex duplex=new Duplex();
-            End front=new End(duplex.front.in(),duplex.front.out());
-            End back=new End(duplex.back.in(),duplex.back.out());
-            return new Holder(front,back);
+            return new Holder(duplex.front,duplex.back);
         }
         public static synchronized Holder create(int port) {
             if(port==noPort) return duplex();

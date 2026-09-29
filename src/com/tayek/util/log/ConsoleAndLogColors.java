@@ -21,15 +21,6 @@ public class ConsoleAndLogColors {
         String key=containsKey(string);
         return key!=null?map.get(key):blackOrWhite;
     }
-    private static boolean containsAGTPKey(String string) {
-        for(String key:gtpKeys) if(string.contains(key)) return true;
-        return false;
-    }
-    private static String escapeSequence2(String string) {
-        String key=null;
-        if(containsAGTPKey(string));
-        return key!=null?map.get(key):color_YELLOW;
-    }
     public static String quote(String escapeSequence) {
         StringBuffer stringBuffer=new StringBuffer();
         for(int i=0;i<escapeSequence.length();++i) stringBuffer.append('\\').append(escapeSequence.charAt(i));
@@ -151,7 +142,6 @@ public class ConsoleAndLogColors {
     public static final String color_CYAN_BACKGROUND_BRIGHT="\033[0;106m"; // CYAN
     public static final String color_WHITE_BACKGROUND_BRIGHT="\033[0;107m"; // WHITE
     public static String blackOrWhite=color_WHITE; // hack for not knowing background color
-    public static final Set<String> gtpKeys=Set.of("recorder","black","white","model");
     public static final String[] strings=new String[] {"a nothing","a main foo","a game foo","a recorder bar",
             "a black xxx","a white xxx","a server xxx","a model xxx",};
     public static final Map<String,String> map=new LinkedHashMap<>();
