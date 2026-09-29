@@ -3,25 +3,18 @@ import java.io.*;
 import java.nio.file.Files;
 public class Serialization {
 	public static byte[] save(final Object o) {
-		try {
-			ByteArrayOutputStream baos=new ByteArrayOutputStream();
-			ObjectOutputStream out=new ObjectOutputStream(baos);
+		ByteArrayOutputStream baos=new ByteArrayOutputStream();
+		try(ObjectOutputStream out=new ObjectOutputStream(baos)) {
 			out.writeObject(o);
-			out.flush();
-			out.close();
-			return baos.toByteArray();
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}
+		return baos.toByteArray();
 	}
 	public static Object restore(final ObjectInputStream objectInputStream) {
-		try {
-			final Object o=objectInputStream.readObject();
-			objectInputStream.close();
-			return o;
-		} catch(IOException e) {
-			throw new RuntimeException(e);
-		} catch(ClassNotFoundException e) {
+		try(objectInputStream) {
+			return objectInputStream.readObject();
+		} catch(IOException|ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 	}

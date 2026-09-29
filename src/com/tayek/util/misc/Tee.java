@@ -2,13 +2,14 @@ package com.tayek.util.misc;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 public class Tee extends FilterOutputStream {
 	// make this into a writer or make a version for writers
 	// not a good idea unless we use the apache thing
 	public Tee(OutputStream out) {
 		super(out);
-		stream.addElement(out);
+		stream.add(out);
 		printStream=new PrintStream(this,true) {
 			@Override public void println(String string) { super.println(prefix+string); }
 		};
@@ -20,29 +21,23 @@ public class Tee extends FilterOutputStream {
 		// seems like we don't have a need for this yet
 	}
 	public synchronized void addOutputStream(OutputStream out) {
-		stream.addElement(out);
+		stream.add(out);
 	}
-	protected final Vector<OutputStream> outputs() {
+	protected final List<OutputStream> outputs() {
 		return stream;
 	}
 	@Override
 	public synchronized void write(int b) throws IOException {
-		for(Enumeration<OutputStream> e=stream.elements();e.hasMoreElements();) {
-			OutputStream out=e.nextElement();
+		for(OutputStream out:stream) {
 			out.write(b);
 			out.flush();
 		}
 	}
 	@Override
 	public synchronized void write(byte[] data,int offset,int length) throws IOException {
-		Integer i=0;
-		for(Enumeration<OutputStream> e=stream.elements();e.hasMoreElements();) {
-			OutputStream out=e.nextElement();
-			if(verbose) {
-				String index=i.toString();
-				out.write(index.charAt(0)); // fails if more than10 streams.
-				out.write('>');
-			}
+		int i=0;
+		for(OutputStream out:stream) {
+			if(verbose) out.write((i+">").getBytes());
 			out.write(data,offset,length);
 			out.flush();
 			++i;
@@ -95,5 +90,5 @@ public class Tee extends FilterOutputStream {
 	public String prefix="T ";
 	protected PrintStream previousOut,previousErr;
 	public final PrintStream printStream;
-	private final Vector<OutputStream> stream=new Vector<OutputStream>();
+	private final List<OutputStream> stream=new CopyOnWriteArrayList<>();
 }

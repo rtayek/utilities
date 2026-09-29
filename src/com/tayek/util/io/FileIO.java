@@ -1,14 +1,16 @@
 package com.tayek.util.io;
 import java.io.*;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import com.tayek.util.core.Texts;
+/**
+ * File and reader helpers. Text is read and written as UTF-8, the default charset since Java 18.
+ * Methods that return null or print on failure keep doing so; the ...OrThrow variants throw.
+ */
 public class FileIO {
+	/** Adds dir, or every file under it, to files (a new list if files is null). */
 	public static List<File> addFiles(List<File> files,File dir) {
 		if(files==null) files=new LinkedList<File>();
 		if(!dir.isDirectory()) {
@@ -19,31 +21,7 @@ public class FileIO {
 			addFiles(files,file);
 		return files;
 	}
-	public static void toFile(final byte[] b,final File file) {
-		try {
-			Files.write(file.toPath(),b);
-		} catch(IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	public static void toFile(final String s,final File file) {
-		write(s,file);
-	}
-	public static void toNewFile(final String string,final File file) throws IOException {
-		boolean justDeleted=false;
-		if(file.exists()) {
-			if(file.canWrite()) {
-				Files.delete(file.toPath());
-				justDeleted=true;
-			} else throw new RuntimeException("attempt to delete non writable file: "+file);
-		}
-		try {
-			Files.writeString(file.toPath(),string,Charset.defaultCharset(),StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
-		} catch(IOException e) {
-			System.err.println("got a "+e+" with justDeleted="+justDeleted);
-			throw e;
-		}
-	}
+	/** Prints the various names Java gives file. */
 	public static void p(File file) {
 		try {
 			System.out.println("file="+file);
@@ -59,225 +37,101 @@ public class FileIO {
 			System.out.println(e);
 		}
 	}
+	/** Appends everything reader has to stringBuffer, then closes reader. Prints on failure. */
 	public static void fromReader(final StringBuffer stringBuffer,Reader reader) {
-		if(reader!=null) try {
-			int c=0;
-			while((c=reader.read())!=-1)
-				stringBuffer.append((char)c);
-			reader.close();
+		if(reader!=null) try(reader) {
+			StringWriter writer=new StringWriter();
+			reader.transferTo(writer);
+			stringBuffer.append(writer);
 		} catch(IOException e) {
 			System.out.println("fromReader caught: "+e);
 			e.printStackTrace();
 		}
-	}
-	public static String toString(final Reader reader) throws IOException {
-		if(reader==null) return null;
-		try {
-			StringBuilder sb=new StringBuilder();
-			for(int c=reader.read();c!=-1;c=reader.read())
-				sb.append((char)c);
-			return sb.toString();
-		} finally {
-			reader.close();
-		}
-	}
-	public static String toString(final File file) throws FileNotFoundException,IOException {
-		return file!=null?Files.readString(file.toPath(),Charset.defaultCharset()):null;
 	}
 	public static String fromReader(final Reader reader) {
 		StringBuffer stringBuffer=new StringBuffer();
 		fromReader(stringBuffer,reader);
 		return stringBuffer.toString();
 	}
-	public static void fromFile(final StringBuffer stringBuffer,final File file) {
-		try {
-			stringBuffer.append(Files.readString(file.toPath(),Charset.defaultCharset()));
-		} catch(IOException e) {
-			System.out.println(file+" fromFile caught: "+e);
+	/** Everything reader has, or null if reader is null. Closes reader. */
+	public static String toString(final Reader reader) throws IOException {
+		if(reader==null) return null;
+		try(reader) {
+			StringWriter writer=new StringWriter();
+			reader.transferTo(writer);
+			return writer.toString();
 		}
 	}
+	/** The whole file, or null if file is null. */
+	public static String toString(final File file) throws IOException {
+		return file!=null?Files.readString(file.toPath()):null;
+	}
+	/** The whole file, or "" after printing the error. */
 	public static String fromFile(final File file) {
-		StringBuffer stringBuffer=new StringBuffer();
-		fromFile(stringBuffer,file);
-		return stringBuffer.toString();
+		try {
+			return Files.readString(file.toPath());
+		} catch(IOException e) {
+			System.out.println(file+" fromFile caught: "+e);
+			return "";
+		}
 	}
 	public static List<String> toStrings(final BufferedReader r) {
 		try {
 			return toStrings((Reader)r);
 		} catch(IOException e) {
-			throw new RuntimeException(e);
+			throw new UncheckedIOException(e);
 		}
 	}
+	/** All lines of reader (empty if reader is null). Closes reader. */
 	public static List<String> toStrings(final Reader reader) throws IOException {
 		if(reader==null) return Collections.emptyList();
-		final BufferedReader bufferedReader=reader instanceof BufferedReader?(BufferedReader)reader:new BufferedReader(reader);
-		try {
-			final List<String> lines=new LinkedList<String>();
-			for(String line=bufferedReader.readLine();line!=null;line=bufferedReader.readLine())
-				lines.add(line);
-			return lines;
-		} finally {
-			bufferedReader.close();
+		try(BufferedReader bufferedReader=reader instanceof BufferedReader b?b:new BufferedReader(reader)) {
+			return new LinkedList<>(bufferedReader.lines().toList());
+		} catch(UncheckedIOException e) {
+			throw e.getCause();
 		}
 	}
+	/** All lines of file (empty if file is null). */
 	public static List<String> toStrings(final File file) throws IOException {
-		return file!=null?Files.readAllLines(file.toPath(),Charset.defaultCharset()):Collections.emptyList();
+		return file!=null?Files.readAllLines(file.toPath()):Collections.emptyList();
 	}
-	public static List<String> getListOfLines(BufferedReader bufferedReader) {
-		try {
-			return toStrings(bufferedReader);
-		} catch(RuntimeException e) {
-			System.out.println(e);
-			return Collections.emptyList();
-		}
-	}
-	public static String get(BufferedReader bufferedReader) {
-		StringBuffer stringBuffer=new StringBuffer();
-		try {
-			for(String line=bufferedReader.readLine();line!=null;line=bufferedReader.readLine())
-				stringBuffer.append(line).append(' ');
-		} catch(IOException e) {
-			System.out.println(e);
-		}
-		return stringBuffer.toString();
-	}
-	public static List<String> getAsListOfStrings(URL url) { // get url as list
-																// of strings
-		List<String> list=null;
-		BufferedReader bufferedReader=null;
-		InputStream inputStream=null;
-		try {
-			inputStream=url.openStream();
-		} catch(IOException e) {
-			e.printStackTrace();
-			return list;
-		}
-		try {
-			bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
-			list=getListOfLines(bufferedReader);
-			bufferedReader.close();
-			return list;
-		} catch(IOException e) {
-			e.printStackTrace();
-		} finally {
-			if(bufferedReader!=null) try {
-				bufferedReader.close();
-			} catch(IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return Collections.emptyList();
-	}
-	public static String get(URL url) {
-		String string=null;
-		BufferedReader bufferedReader=null;
-		InputStream inputStream=null;
-		try {
-			inputStream=url.openStream();
-		} catch(IOException e) {
-			System.out.println(e);
-			return string;
-		}
-		try {
-			bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
-			string=get(bufferedReader);
-			bufferedReader.close();
-		} catch(IOException e) {
-			System.out.println(e);
-		} finally {
-			if(bufferedReader!=null) try {
-				bufferedReader.close();
-			} catch(IOException e) {
-				System.out.println(e);
-			}
-		}
-		// may return an partial result!
-		return string;
-	}
-	public static String get(final File file) {
-		if(!file.canRead()) {
-			System.out.println("can not read file: ="+file);
-			return null;
-		}
-		String string=null;
-		try(BufferedReader bufferedReader=Files.newBufferedReader(file.toPath(),Charset.defaultCharset())) {
-			string=get(bufferedReader);
-		} catch(IOException e) {
-			System.out.println(e);
-		}
-		return string!=null?string.toString():null;
-	}
+	/** Writes string to file, replacing it. */
 	public static void write(final String string,final File file) {
 		try {
-			Files.writeString(file.toPath(),string,Charset.defaultCharset(),StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
-		} catch(Throwable t) {
-			t.printStackTrace();
-			throw new RuntimeException("can not write file: "+file);
-		}
-	}
-	public static List<String> getFileAsListOfStrings(final File file) {
-		try {
-			return toStrings(file);
+			Files.writeString(file.toPath(),string);
 		} catch(IOException e) {
-			throw new RuntimeException(e);
+			throw new UncheckedIOException("can not write file: "+file,e);
 		}
 	}
-	public static List<String> getDataThatMayHaveLineFeeds(final String[] data) {
-		final BufferedReader r=new BufferedReader(new StringReader(Texts.cat(data)));
-		return toStrings(r);
-	}
+	/** A reader on file, or null if it can not be read. */
 	public static Reader toReader(File file) {
-		Reader reader=null;
-		if(file.exists()&&file.canRead()) {
-			try {
-				reader=Files.newBufferedReader(file.toPath(),Charset.defaultCharset());
-			} catch(IOException e) {
-				System.out.println(file+" toReader caught: "+e);
-			}
+		if(!(file.exists()&&file.canRead())) return null;
+		try {
+			return Files.newBufferedReader(file.toPath());
+		} catch(IOException e) {
+			System.out.println(file+" toReader caught: "+e);
+			return null;
 		}
-		return reader;
 	}
 	public static Reader toReaderOrThrow(File file) throws IOException {
-		Reader reader=null;
-		if(file.exists()&&file.canRead()) {
-			reader=Files.newBufferedReader(file.toPath(),Charset.defaultCharset());
-		} else throw new RuntimeException("file not found or can not be read.");
-		return reader;
+		if(!(file.exists()&&file.canRead())) throw new RuntimeException("file not found or can not be read.");
+		return Files.newBufferedReader(file.toPath());
 	}
 	public static Reader toReader(String string) {
 		return string!=null?new StringReader(string):null;
 	}
+	/** A reader on the strings joined with no separator, or null if there are none. */
 	public static Reader toReader(String[] strings) {
 		String value=Texts.toString(strings);
 		return value!=null?new StringReader(value):null;
 	}
-	public static BufferedReader toBufferedReader(String string) {
-		return new BufferedReader(new StringReader(string));
-	}
+	/** A writer that replaces file, or null after printing the error. */
 	public static Writer toWriter(File file) {
-		Writer writer=null;
 		try {
-			writer=Files.newBufferedWriter(file.toPath(),Charset.defaultCharset(),StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
+			return Files.newBufferedWriter(file.toPath());
 		} catch(IOException e) {
 			System.out.println(file+" toWriter caught: "+e);
-		}
-		return writer;
-	}
-	public static Writer toWriterOrThrow(File file) throws IOException {
-		return Files.newBufferedWriter(file.toPath(),Charset.defaultCharset(),StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
-	}
-	public static void close(final Reader r) {
-		try {
-			r.close();
-		} catch(IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	public static void close(final Writer w) {
-		try {
-			w.close();
-		} catch(IOException e) {
-			throw new RuntimeException(e);
+			return null;
 		}
 	}
 }

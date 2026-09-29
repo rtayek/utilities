@@ -3,6 +3,7 @@ import static com.tayek.util.io.Print.*;
 import java.io.IOException;
 import java.net.*;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.logging.Logger;
 import com.tayek.util.core.Et;
 public class Net {
@@ -30,17 +31,15 @@ public class Net {
         public InetAddress inetAddress;
     }
     public static Set<InetAddress> addressesWith(String networkPrefix) {
-        Set<InetAddress> set=new LinkedHashSet<>();
         try {
-            Enumeration<NetworkInterface> networkInterfaces=NetworkInterface.getNetworkInterfaces();
-            for(NetworkInterface networkInterface:Collections.list(networkInterfaces))
-                for(InetAddress inetAddress:Collections.list(networkInterface.getInetAddresses()))
-                    if(inetAddress.isSiteLocalAddress()&&inetAddress.getHostAddress().contains(networkPrefix)) set.add(inetAddress);
+            return NetworkInterface.networkInterfaces().flatMap(NetworkInterface::inetAddresses)
+                    .filter(inetAddress->inetAddress.isSiteLocalAddress()&&inetAddress.getHostAddress().contains(networkPrefix))
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
         } catch(SocketException e) {
             p("caught: "+e);
             e.printStackTrace();
+            return new LinkedHashSet<>();
         }
-        return set;
     }
     public static InetAddress addressWith(String networkPrefix) {
         Set<InetAddress> inetAddresses=addressesWith(networkPrefix);
@@ -64,16 +63,11 @@ public class Net {
     }
     static void printNetworkInterface(NetworkInterface netint) {
         p("Display name: "+netint.getDisplayName()+", Name: "+netint.getName());
-        Enumeration<InetAddress> inetAddresses=netint.getInetAddresses();
-        for(InetAddress inetAddress:Collections.list(inetAddresses))
-            p("\tInetAddress: "+inetAddress+" "+inetAddress.isSiteLocalAddress());
+        netint.inetAddresses().forEach(inetAddress->p("\tInetAddress: "+inetAddress+" "+inetAddress.isSiteLocalAddress()));
     }
     public static void printNetworkInterfaces() {
-        Enumeration<NetworkInterface> networkInterfaces;
         try {
-            networkInterfaces=NetworkInterface.getNetworkInterfaces();
-            for(NetworkInterface networkInterface:Collections.list(networkInterfaces))
-                printNetworkInterface(networkInterface);
+            NetworkInterface.networkInterfaces().forEach(Net::printNetworkInterface);
         } catch(SocketException e) {
             p("ni caught: '"+e+"'");
         }
@@ -88,12 +82,6 @@ public class Net {
         try {
             serverSocket=new ServerSocket();
             serverSocket.bind(socketAddress);
-        } catch(BindException e) {
-            e.printStackTrace();
-            p("after: "+et+",  caught: '"+e+"'");
-        } catch(IOException e) {
-            e.printStackTrace();
-            p("after: "+et+",  caught: '"+e+"'");
         } catch(Exception e) {
             e.printStackTrace();
             p("after: "+et+",  caught: '"+e+"'");
@@ -114,8 +102,6 @@ public class Net {
         try {
             socket.connect(socketAddress,timeout);
             return socket;
-        } catch(SocketTimeoutException e) {
-            logger.warning(socketAddress+", after: "+et+", with timeout: "+timeout+", caught: '"+e+"'");
         } catch(IOException e) {
             logger.warning(socketAddress+", after: "+et+", with timeout: "+timeout+", caught: '"+e+"'");
         }

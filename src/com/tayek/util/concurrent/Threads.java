@@ -4,10 +4,7 @@ public class Threads {
         return thread.toString()+", state: "+thread.getState()+", is alive: "+thread.isAlive()+", is interrupted:  "+thread.isInterrupted();
     }
     public static Thread[] getThreads() {
-        int big=2*Thread.activeCount();
-        Thread[] threads=new Thread[big];
-        Thread.enumerate(threads);
-        return threads;
+        return Thread.getAllStackTraces().keySet().toArray(new Thread[0]);
     }
     /** Prints the live threads once a second until no more than n are active (was log.Joiner). */
     public static void waitUntilAtMost(int n) throws InterruptedException {

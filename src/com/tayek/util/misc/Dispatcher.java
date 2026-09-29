@@ -57,17 +57,15 @@ public class Dispatcher {
         } else {
             final String[] theRest=parts.length>1?Arrays.copyOfRange(parts,1,parts.length):new String[0];
             System.out.println("the rest: "+Arrays.asList(theRest));
-            new Thread(new Runnable() {
-                @Override public void run() {
-                    System.out.println("running: "+entryPoint+" with: "+Arrays.asList(theRest));
-                    try {
-                        entryPoint.getMethod("main",String[].class).invoke(null,(Object)theRest);
-                    } catch(IllegalAccessException|IllegalArgumentException|InvocationTargetException|NoSuchMethodException|SecurityException e) {
-                        e.printStackTrace();
-                        throw new RuntimeException(e);
-                    }
-                    printThreads();
+            new Thread(()-> {
+                System.out.println("running: "+entryPoint+" with: "+Arrays.asList(theRest));
+                try {
+                    entryPoint.getMethod("main",String[].class).invoke(null,(Object)theRest);
+                } catch(ReflectiveOperationException|IllegalArgumentException|SecurityException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
+                printThreads();
             },entryPoint.toString()).start();
         }
         return entryPoint;

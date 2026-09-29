@@ -29,7 +29,7 @@ public class Histogram {
 		synchronized(recent) {
 			recent.put(n,x);
 		}
-		if(Double.valueOf(x).equals(Double.NaN)) {
+		if(Double.isNaN(x)) {
 			nans++; // omitted?
 			return;
 		}
@@ -141,19 +141,10 @@ public class Histogram {
 		return underflows;
 	}
 	public String toString() {
-		final StringBuffer sb=new StringBuffer();
-		sb.append((float)min()).append("<=").append((float)mean());
-		sb.append('/').append(n);
-		sb.append("<=").append((float)max()).append(" ");
-		sb.append(bin(-1)).append(",[");
-		for(int i=0;i<bins;i++)
-			sb.append(i>0?",":"").append(bin(i));
-		sb.append("],").append(bin(bins));
-		sb.append(" NaNs: ").append(nans);
-		return sb.toString();
+		return toString("");
 	}
 	public String toString(String prefix) {
-		final StringBuffer sb=new StringBuffer();
+		final StringBuilder sb=new StringBuilder();
 		sb.append(prefix);
 		sb.append((float)min()).append("<=").append((float)mean());
 		sb.append('/').append(n);

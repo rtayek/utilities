@@ -5,9 +5,7 @@ public class Copy implements Runnable {
     public Copy(BufferedReader in,Writer out) { this.in=in; this.out=out; }
     @Override public void run() {
         try {
-            boolean once=false;
             while(!done) {
-                if(!once) { once=true; }
                 String string=in.readLine();
                 if(string==null) { done=true; break; }
                 out.write(string+'\n');

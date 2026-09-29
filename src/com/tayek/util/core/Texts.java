@@ -1,12 +1,12 @@
 package com.tayek.util.core;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 public class Texts {
 	public static String getString(String key,ResourceBundle resourceBundle) {
@@ -17,9 +17,7 @@ public class Texts {
 		return string;
 	}
 	public static String pad(String string,int length) {
-		for(;string.length()<length;string+=' ')
-			;
-		return string;
+		return string+" ".repeat(Math.max(0,length-string.length()));
 	}
 	public static String toString(final String[] strings) {
 		return strings!=null?toString(Arrays.asList(strings).iterator(),null,false):null;
@@ -31,23 +29,19 @@ public class Texts {
 		return toString(Arrays.asList(strings).iterator(),separator,addSeparatorAtEnd);
 	}
 	public static String toString(final Iterator<String> iterator,final String separator,final boolean addSeparatorAtEnd) {
-		String s=null;
-		if(iterator!=null&&iterator.hasNext()) {
-			final StringBuilder sb=new StringBuilder();
-			for(;iterator.hasNext();) {
-				sb.append(iterator.next());
-				if(separator!=null&&(iterator.hasNext()||addSeparatorAtEnd)) sb.append(separator);
-				s=sb.toString();
-			}
+		if(iterator==null||!iterator.hasNext()) return null; // null, not "", for no strings
+		final StringBuilder sb=new StringBuilder();
+		while(iterator.hasNext()) {
+			sb.append(iterator.next());
+			if(separator!=null&&(iterator.hasNext()||addSeparatorAtEnd)) sb.append(separator);
 		}
-		return s;
+		return sb.toString();
 	}
 	public static boolean isLineFeedOrCarriageReturn(Character character) {
 		return character.equals('\n')||character.equals('\r');
 	}
 	public static void removeCr(final StringBuffer stringBuffer,final String string) {
-		for(int i=0;i<string.length();i++)
-			if(string.charAt(i)!='\r') stringBuffer.append(string.charAt(i));
+		stringBuffer.append(string.replace("\r",""));
 	}
 	public static String noEol(String string) {
 		String s=string;
@@ -56,7 +50,7 @@ public class Texts {
 		return s;
 	}
 	public static String quote(String string) {
-		StringBuffer sb=new StringBuffer(string.length());
+		StringBuilder sb=new StringBuilder(string.length());
 		for(int i=0;i<string.length();i++) {
 			char c=string.charAt(i);
 			if(isLineFeedOrCarriageReturn(c)) sb.append("\\\\");
@@ -123,17 +117,13 @@ public class Texts {
 	public static String quoteXml(final String string) {
 		return quote(string,xmlQuoteMap);
 	}
+	/** Each string followed by a line feed. */
 	public static String cat(final String[] data) {
-		final StringBuffer sb=new StringBuffer();
-		for(int i=0;i<data.length;i++)
-			sb.append(data[i]).append('\n');
-		return sb.toString();
+		return cat(Arrays.asList(data));
 	}
+	/** Each string followed by a line feed. */
 	public static String cat(final List<String> strings) {
-		final StringBuffer sb=new StringBuffer();
-		for(String string:strings)
-			sb.append(string).append('\n');
-		return sb.toString();
+		return strings.stream().map(string->string+'\n').collect(Collectors.joining());
 	}
 	public static void printDifferences(PrintStream ps,String expected,String actual) {
 		if(!expected.equals(actual)) {
@@ -183,10 +173,5 @@ public class Texts {
 		return IntStream.range(0,characters.length).mapToObj(i->characters[i]).toArray(Character[]::new);
 	}
 	public static final String[] emptyStringArray=new String[0];
-	static final Map<Character,String> xmlQuoteMap=new HashMap<Character,String>();
-	static {
-		xmlQuoteMap.put(Character.valueOf('&'),"&amp;");
-		xmlQuoteMap.put(Character.valueOf('<'),"&lt;");
-		xmlQuoteMap.put(Character.valueOf('>'),"&gt;");
-	}
+	static final Map<Character,String> xmlQuoteMap=Map.of('&',"&amp;",'<',"&lt;",'>',"&gt;");
 }

@@ -3,11 +3,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
+import java.net.InetAddress;
+import java.util.concurrent.CompletableFuture;
 import static com.tayek.util.io.Print.*;
-import static java.lang.Math.*;
 import java.util.*;
 import java.util.logging.Logger;
-import com.tayek.util.core.Android;
 public class Exec {
     public Exec(String command) { // split on whitespace like exec(String) does.
         processBuilder=new ProcessBuilder(splitCommand(command));
@@ -18,15 +19,9 @@ public class Exec {
     }
     public static String output(InputStream inputStream) throws IOException {
         StringBuilder sb=new StringBuilder();
-        BufferedReader br=null;
-        try {
-            br=new BufferedReader(new InputStreamReader(inputStream));
-            String line=null;
-            while((line=br.readLine())!=null) {
-                sb.append(line+System.getProperty("line.separator"));
-            }
-        } finally {
-            br.close();
+        try(BufferedReader br=new BufferedReader(new InputStreamReader(inputStream))) {
+            for(String line=br.readLine();line!=null;line=br.readLine())
+                sb.append(line).append(System.lineSeparator());
         }
         return sb.toString();
     }
@@ -37,27 +32,23 @@ public class Exec {
             // drain stderr on its own thread and stdout here, *then* wait.
             // waiting first can hang forever once the process fills a pipe buffer.
             final Process started=process;
-            java.util.concurrent.CompletableFuture<String> errorFuture=java.util.concurrent.CompletableFuture.supplyAsync(()-> {
+            CompletableFuture<String> errorFuture=CompletableFuture.supplyAsync(()-> {
                 try {
                     return output(started.getErrorStream());
                 } catch(IOException e) {
-                    throw new java.io.UncheckedIOException(e);
+                    throw new UncheckedIOException(e);
                 }
             });
             output=output(process.getInputStream());
             error=errorFuture.join();
             rc=process.waitFor();
-        } catch(IOException e) {
-            l.warning("caught: "+e);
-            e.printStackTrace();
         } catch(InterruptedException e) {
             l.warning("caught: "+e);
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
         } catch(Exception e) {
             l.warning("caught: "+e);
             e.printStackTrace();
         }
-        //printThreads();
         return this;
     }
     public void print() {
@@ -103,21 +94,12 @@ public class Exec {
     public static int ping(String host) {
         return exec(new String[] {"ping",host});
     }
+    /** True if host answers within timeout ms. Uses ICMP where the OS allows it, else a TCP probe. */
     public static boolean canWePing(String host,int timeout) {
-        String timeoutString="";
-        if(Android.isAndroid()) {
-            timeoutString+=max(1,timeout/1_000);
-            return exec(new String[] {"ping","-c","1","-W",timeoutString,host})==0;
-        } else {
-            timeoutString+=timeout;
-            Exec exec=new Exec(new String[] {"ping","-n","1","-w",""+timeoutString,host});
-            exec.run();
-            boolean ok=false;
-            if(exec.output.contains("Reply from "+host+":")) {
-                ok=true;
-            }
-            else p("output: "+exec.output);
-            return ok;
+        try {
+            return InetAddress.getByName(host).isReachable(timeout);
+        } catch(IOException e) {
+            return false;
         }
     }
     public static void main(String[] args) throws InterruptedException,IOException {

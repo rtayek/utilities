@@ -9,7 +9,7 @@ public class Print {
 	public static void p(PrintStream out,String string) {
 		synchronized(out) {
 			pn(out,string);
-			pn(out,System.getProperty("line.separator"));
+			pn(out,System.lineSeparator());
 		}
 	}
 	public static void p(String string) {

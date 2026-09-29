@@ -1,5 +1,4 @@
 package com.tayek.util.range;
-import java.lang.reflect.Constructor;
 import java.util.*;
 import static com.tayek.util.io.Print.*;
 public class Range<T extends Comparable<T>> implements Comparable<Range<T>>,Iterable<T> {
@@ -91,30 +90,16 @@ public class Range<T extends Comparable<T>> implements Comparable<Range<T>>,Iter
         if(rc==0) rc=to.compareTo(o.to);
         return rc;
     }
+    /** The sequence starting at from; Integer and Character are supported. */
     @SuppressWarnings("unchecked") public Sequence<T> sequence(T from) {
-        String className=Range.class.getName()+"$Sequence$"+from.getClass().getSimpleName()+"Sequence";
-        Sequence<T> sequence=null;
-        try {
-            Class<T> clazz=(Class<T>)Class.forName(className);
-            Constructor<T> ctor=clazz.getDeclaredConstructor(from.getClass());
-            sequence=(Sequence<T>)ctor.newInstance(from);
-        } catch(Exception e) {
-            throw new RuntimeException("No Sequence found for type "+from.getClass());
-        }
-        return sequence;
+        return (Sequence<T>)switch(from) {
+            case Integer i -> new Sequence.IntegerSequence(i);
+            case Character c -> new Sequence.CharacterSequence(c);
+            default -> throw new RuntimeException("No Sequence found for type "+from.getClass());
+        };
     }
-    // combine these!
-    @SuppressWarnings("unchecked") public Iterator<T> iterator() {
-        String className=Range.class.getName()+"$Sequence$"+from.getClass().getSimpleName()+"Sequence";
-        Sequence<T> sequence=null;
-        try {
-            Class<T> clazz=(Class<T>)Class.forName(className);
-            Constructor<T> ctor=clazz.getDeclaredConstructor(from.getClass());
-            sequence=(Sequence<T>)ctor.newInstance(from);
-        } catch(Exception e) {
-            throw new RuntimeException("No Sequence found for type "+from.getClass());
-        }
-        return new RangeIterator<T>(sequence,to);
+    @Override public Iterator<T> iterator() {
+        return new RangeIterator<T>(sequence(from),to);
     }
     @Override public String toString() {
         if(from.equals(to)) return "("+from+')';

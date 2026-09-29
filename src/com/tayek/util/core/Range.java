@@ -1,7 +1,5 @@
 package com.tayek.util.core;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 public class Range<T extends Comparable<T>> {
@@ -11,20 +9,10 @@ public class Range<T extends Comparable<T>> {
     public static <T extends Number & Comparable<T>> int compare(T a,T b) { return a.compareTo(b); }
     public Range(T min,T max) { this.min=min; this.max=max; }
     public boolean contains(T t) {
-        if(min instanceof Number) {
-            int rc1=numberComparator.compare((Number)min,(Number)t);
-            int rc2=numberComparator.compare((Number)t,(Number)max);
-            if(rc1<=0&&rc2<=0) return true;
-        } else if(min instanceof Enum<?>) {
-            Class<?> clazz=((Enum<?>)t).getDeclaringClass();
-            if(clazz!=null) {
-                List<?> enums=Arrays.asList(clazz.getEnumConstants());
-                if(enums.contains(t))
-                    if(((Enum<?>)min).ordinal()<=((Enum<?>)t).ordinal()
-                            &&((Enum<?>)t).ordinal()<=((Enum<?>)max).ordinal())
-                        return true;
-            }
-        }
+        if(min instanceof Number low&&t instanceof Number value&&max instanceof Number high)
+            return numberComparator.compare(low,value)<=0&&numberComparator.compare(value,high)<=0;
+        if(min instanceof Enum<?> low&&t instanceof Enum<?> value&&max instanceof Enum<?> high)
+            return low.getDeclaringClass()==value.getDeclaringClass()&&low.ordinal()<=value.ordinal()&&value.ordinal()<=high.ordinal();
         return false;
     }
     enum L { a, b, c, d, e }
