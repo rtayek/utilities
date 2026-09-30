@@ -1,6 +1,11 @@
 plugins {
 	id "java"
+  	id "eclipse"
 	id "maven-publish"
+	id "checkstyle"
+	id "pmd"
+	id "jacoco"
+	id "com.github.spotbugs" version "6.5.10"
 }
 
 group = "com.tayek"
@@ -45,3 +50,46 @@ publishing {
 		}
 	}
 }
+
+// Quality tools, same versions and configs as chatmap.
+// ignoreFailures is true for now: report violations without failing the build.
+// Flip each to false once its baseline is clean.
+
+checkstyle {
+	toolVersion = "10.18.0"
+	configFile = file("config/checkstyle/checkstyle.xml")
+	ignoreFailures = true
+	showViolations = true
+}
+
+pmd {
+	toolVersion = "7.26.0"
+	consoleOutput = true
+	ignoreFailures = true
+	ruleSets = []
+	ruleSetConfig = resources.text.fromFile("config/pmd/pmd.xml")
+}
+
+spotbugs {
+	toolVersion = "4.10.3"
+	ignoreFailures = true
+	excludeFilter = file("config/spotbugs/exclude.xml")
+}
+
+jacoco {
+	toolVersion = "0.8.15"
+}
+
+test {
+	finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.required = true
+		html.required = true
+	}
+}
+
+check.dependsOn jacocoTestReport
