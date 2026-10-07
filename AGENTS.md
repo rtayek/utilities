@@ -148,7 +148,7 @@ Client-specific skill locations MAY differ. Selected skills should be deployed a
 
 This file is the primary governing document for agent behavior in the repository.
 
-Critical instructions MUST NOT depend on automatic discovery of `human.md`, `persona.md`, `index.md`, historical handoffs, or other secondary files.
+Critical instructions MUST NOT depend on automatic discovery of secondary project documents.
 
 Additional project documents SHOULD be named explicitly in the project-context section below together with the condition that requires reading them.
 
@@ -183,20 +183,19 @@ When useful, include:
 
 ## Project Requirements
 
-This block is owned by the repository receiving the shared instructions.
+This repository provides reusable Java 25 utility code and publishes the
+`com.tayek:tutil` library for local consumers.
 
-Project-specific requirements belong here. Synchronization tooling MUST preserve this block when updating the shared portions of `AGENTS.md`.
+Use the Gradle wrapper as the authoritative build, test, quality-report, and
+publication interface.
 
 ## Project Document Map
 
-List only documents that agents may need, and state exactly when they must be read.
-
-Example:
-
-```markdown
-- Agents MUST read `.llm/design.md` before changing architecture.
-- Agents MUST read `.llm/working-context.md` when continuing unfinished project work.
-- Agents MUST NOT read `.llm/handoffs/` unless the current task requires historical evidence.
-```
+- Read `build.gradle` before changing dependencies, Java compatibility,
+  quality tooling, source layout, or publication behavior.
+- Run `./gradlew test` after implementation changes unless the task clearly
+  does not affect executable code.
+- Read `handoff.md`, `history.md`, or other historical notes only when the
+  current task explicitly requires that evidence.
 
 <!-- END PROJECT CONTEXT -->
